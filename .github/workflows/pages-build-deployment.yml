@@ -28,7 +28,7 @@ jobs:
         with:
           # If your site files are at repo root, use "."
           # If they are in a folder (e.g. "dist" or "build"), change this path.
-          path: ./domain-dashboard
+    path: .   # <- was "domain-dashboard"
 
   deploy:
     needs: build
