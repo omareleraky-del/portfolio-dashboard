@@ -20,15 +20,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Build your static site here
-      # If your site is just static HTML/CSS/JS already in the repo, no build is needed.
+      # Build your static site here if needed.
+      # For plain HTML/CSS/JS already in the repo, no build step is required.
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # If your site files are at repo root, use "."
-          # If they are in a folder (e.g. "dist" or "build"), change this path.
-    path: .   # <- was "domain-dashboard"
+          # Your HTML (Team_Dashboard_v.9.html) is at the repo root
+          path: .
 
   deploy:
     needs: build
