@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Business Analysis &amp; Product Management – Portfolio Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Executive portfolio view for Business Analysis &amp; Product Management: duration, risk profile, client coverage, and team utilisation. Reads directly from CSV or Excel uploads in your browser.">
+  <meta name="description" content="Executive Portfolio View for Business Analysis &amp; Product Management: Duration, Risk profile, Client coverage and LoS. Reads directly from CSV or Excel uploads in your browser.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -35,18 +35,18 @@
       --row-alt: #ffffff;
       --focus-ring: #2563eb;
 
-      --topbar-bg: linear-gradient(90deg, #121826, #1b2838);
+      --topbar-bg: linear-gradient(90deg, #111827, #1f2937);
       --topbar-border: rgba(148,163,184,0.25);
       --topbar-text: #f9fafb;
       --topbar-muted: #e5e7eb;
 
       --shadow-strong: 0 18px 45px rgba(15,23,42,0.16);
       --shadow-card: 0 6px 16px rgba(15,23,42,0.06);
-      --shadow-card-strong: 0 8px 24px rgba(15,23,42,0.07);
+      --shadow-card-strong: 0 8px 24px rgba(15,23,42,0.09);
 
-      --chart-axis: #6b7280;
+      --chart-axis: #4b5563;
       --chart-grid: #e5e7eb;
-      --chart-label: #374151;
+      --chart-label: #111827;
 
       --message-info-bg: #e0f2fe;
       --message-info-text: #0f172a;
@@ -55,10 +55,10 @@
       --message-success-bg: #dcfce7;
       --message-success-text: #14532d;
 
-      --font-xs: 0.6875rem;
-      --font-sm: 0.75rem;
-      --font-base: 0.8125rem;
-      --font-md: 0.875rem;
+      --font-xs: 0.7rem;
+      --font-sm: 0.78rem;
+      --font-base: 0.84rem;
+      --font-md: 0.9rem;
       --font-lg: 1rem;
       --line-tight: 1.2;
       --line-normal: 1.45;
@@ -90,18 +90,18 @@
       --row-alt: #020617;
       --focus-ring: #60a5fa;
 
-      --topbar-bg: linear-gradient(90deg, #020617, #0b1120);
+      --topbar-bg: linear-gradient(90deg, #020617, #111827);
       --topbar-border: #020617;
-      --topbar-text: #f9fafb;
+      --topbar-text: #f9faff;
       --topbar-muted: #cbd5f5;
 
       --shadow-strong: 0 18px 45px rgba(15,23,42,0.9);
       --shadow-card: 0 8px 24px rgba(15,23,42,0.8);
-      --shadow-card-strong: 0 12px 40px rgba(15,23,42,0.0);
+      --shadow-card-strong: 0 12px 40px rgba(15,23,42,0.95);
 
-      --chart-axis: #9ca3af;
+      --chart-axis: #e5e7eb;
       --chart-grid: #111827;
-      --chart-label: #e5e7eb;
+      --chart-label: #f9fafb;
 
       --message-info-bg: #1d4ed8;
       --message-info-text: #eff6ff;
@@ -133,18 +133,22 @@
       background: radial-gradient(circle at top left, #020617 0, #020617 40%, #020617 100%);
     }
 
-    .app-shell { min-height: 100vh; display: flex; flex-direction: column; }
+    .app-shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
     .top-bar {
       border-bottom: 1px solid var(--topbar-border);
       background: var(--topbar-bg);
       color: var(--topbar-text);
-      padding: 0.5rem 0 0.25rem;
-      box-shadow: 0 8px 30px rgba(15,23,42,0.25);
+      padding: 0.5rem 0 0.3rem;
+      box-shadow: 0 10px 32px rgba(15,23,42,0.4);
       position: sticky;
       top: 0;
       z-index: 20;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
     }
 
     .top-bar-inner {
@@ -160,7 +164,7 @@
     .top-bar-title {
       font-size: var(--font-md);
       font-weight: 600;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       white-space: nowrap;
     }
@@ -173,9 +177,18 @@
       justify-content: flex-end;
     }
 
-    .asof-pill { font-size: var(--font-xs); color: var(--topbar-muted); opacity: 0.9; white-space: nowrap; }
+    .asof-pill {
+      font-size: var(--font-xs);
+      color: var(--topbar-muted);
+      opacity: 0.9;
+      white-space: nowrap;
+    }
 
-    .pwc-mark { display: flex; align-items: center; gap: 0.5rem; }
+    .pwc-mark {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
     .logo-chip {
       display: inline-flex;
@@ -187,14 +200,20 @@
       border: 1px solid rgba(148,163,184,0.4);
       transition: transform var(--transition-fast), box-shadow var(--transition-fast);
     }
-    .logo-chip:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(15,23,42,0.2); }
-
+    .logo-chip:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(15,23,42,0.35);
+    }
     html[data-theme="dark"] .logo-chip {
       background: #020617;
       border-color: #334155;
     }
 
-    .logo-img { height: 1.25rem; width: auto; display: block; }
+    .logo-img {
+      height: 1.25rem;
+      width: auto;
+      display: block;
+    }
 
     .theme-toggle {
       display: inline-flex;
@@ -206,25 +225,36 @@
       user-select: none;
       position: relative;
     }
-    .theme-toggle input { position: absolute; opacity: 0; pointer-events: none; }
+    .theme-toggle input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
 
     .toggle-track {
-      width: 2rem; height: 1rem;
+      width: 2rem;
+      height: 1rem;
       border-radius: 999px;
       background: rgba(148,163,184,0.4);
       position: relative;
       transition: background var(--transition-fast);
     }
     .toggle-thumb {
-      width: 0.875rem; height: 0.875rem;
+      width: 0.875rem;
+      height: 0.875rem;
       border-radius: 999px;
       background: #f9fafb;
       position: absolute;
-      top: 1px; left: 1px;
-      transition: transform var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast);
+      top: 1px;
+      left: 1px;
+      transition: transform var(--transition-fast),
+                  background var(--transition-fast),
+                  box-shadow var(--transition-fast);
       box-shadow: 0 1px 3px rgba(0,0,0,0.4);
     }
-    .theme-toggle input:checked + .toggle-track { background: var(--accent-soft-strong); }
+    .theme-toggle input:checked + .toggle-track {
+      background: var(--accent-soft-strong);
+    }
     .theme-toggle input:checked + .toggle-track .toggle-thumb {
       transform: translateX(1rem);
       background: #fffbeb;
@@ -246,26 +276,49 @@
       gap: 0.5rem;
       box-shadow: 0 4px 14px rgba(15,23,42,0.2);
     }
-    .message-bar-inner.info { background: var(--message-info-bg); color: var(--message-info-text); }
-    .message-bar-inner.error { background: var(--message-error-bg); color: var(--message-error-text); }
-    .message-bar-inner.success { background: var(--message-success-bg); color: var(--message-success-text); }
-    .message-bar-text { flex: 1; }
+    .message-bar-inner.info {
+      background: var(--message-info-bg);
+      color: var(--message-info-text);
+    }
+    .message-bar-inner.error {
+      background: var(--message-error-bg);
+      color: var(--message-error-text);
+    }
+    .message-bar-inner.success {
+      background: var(--message-success-bg);
+      color: var(--message-success-text);
+    }
+    .message-bar-text {
+      flex: 1;
+    }
     .message-bar-close {
-      border: none; background: transparent; cursor: pointer;
-      font-size: 0.75rem; color: inherit; padding: 0; line-height: 1;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 0.75rem;
+      color: inherit;
+      padding: 0;
+      line-height: 1;
     }
 
     .page {
       max-width: 72rem;
       width: 100%;
       margin: 0.45rem auto 1.4rem;
-      padding: 0.8rem 0.75rem 1.1rem;
-      background: radial-gradient(circle at top, var(--surface) 0, var(--surface-subtle) 45%, var(--bg) 100%);
+      padding: 0.9rem 0.8rem 1.1rem;
+      background: radial-gradient(circle at top, var(--surface) 0, var(--surface-subtle) 40%, var(--bg) 100%);
       border-radius: 1rem;
-      box-shadow: var(--shadow-strong), 0 0 0 1px rgba(148,163,184,0.18);
-      transition: box-shadow var(--transition-med), background var(--transition-med);
+
+      /* Expanded / stronger border */
+      border: 2px solid rgba(148,163,184,0.6);
+      box-shadow: var(--shadow-strong);
+
+      transition: box-shadow var(--transition-med), background var(--transition-med), border-color var(--transition-med);
     }
-    html[data-theme="dark"] .page { box-shadow: var(--shadow-strong); }
+    html[data-theme="dark"] .page {
+      box-shadow: var(--shadow-strong);
+      border-color: #334155;
+    }
 
     .header-row {
       display: flex;
@@ -274,7 +327,7 @@
       gap: 0.75rem;
       margin-bottom: 0.6rem;
       border-bottom: 1px solid var(--border);
-      padding-bottom: 0.6rem;
+      padding-bottom: 0.55rem;
     }
 
     .heading-block { flex: 1; min-width: 0; }
@@ -302,7 +355,11 @@
       white-space: nowrap;
     }
 
-    .timestamp { font-size: var(--font-xs); color: var(--muted); margin: 0.2rem 0 0.8rem; }
+    .timestamp {
+      font-size: var(--font-xs);
+      color: var(--muted);
+      margin: 0.2rem 0 0.8rem;
+    }
 
     .btn {
       font-size: var(--font-xs);
@@ -317,8 +374,10 @@
       align-items: center;
       gap: 0.35rem;
       min-height: 2.1rem;
-      transition: background var(--transition-fast), border-color var(--transition-fast),
-                  color var(--transition-fast), box-shadow var(--transition-fast),
+      transition: background var(--transition-fast),
+                  border-color var(--transition-fast),
+                  color var(--transition-fast),
+                  box-shadow var(--transition-fast),
                   transform var(--transition-fast);
     }
     .btn:hover {
@@ -327,8 +386,14 @@
       transform: translateY(-0.5px);
       box-shadow: 0 3px 8px rgba(15,23,42,0.15);
     }
-    .btn:active { transform: translateY(0); box-shadow: none; }
-    .btn:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+    .btn:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
 
     .btn-secondary {
       border-color: #d1d5db;
@@ -354,28 +419,44 @@
       align-items: center;
       justify-content: center;
     }
-    .btn-small { font-size: 0.7rem; padding: 0.25rem 0.6rem; min-height: 1.75rem; }
+    .btn-small {
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      min-height: 1.75rem;
+    }
 
-    .btn.btn-filter { padding: 0.35rem 0.8rem; min-height: 2.25rem; min-width: 40px; }
-    .btn-print-now-hidden { display: none; }
+    .btn.btn-filter {
+      padding: 0.35rem 0.8rem;
+      min-height: 2.25rem;
+      min-width: 40px;
+    }
+    .btn-print-now-hidden {
+      display: none;
+    }
 
     .filter-icon {
-      width: 16px; height: 16px;
+      width: 16px;
+      height: 16px;
       display: block;
       color: var(--icon-neutral);
     }
     .filters-header-icon .filter-icon,
-    #toggleFilters .filter-icon { color: var(--icon-neutral); }
+    #toggleFilters .filter-icon {
+      color: var(--icon-neutral);
+    }
 
     .filters-active #toggleFilters {
       border-color: var(--icon-active);
       background: var(--accent-soft);
       color: var(--icon-active);
     }
-    .filters-active #toggleFilters .filter-icon { color: var(--icon-active); }
+    .filters-active #toggleFilters .filter-icon {
+      color: var(--icon-active);
+    }
 
     #toggleFilters .btn-icon {
-      width: 24px; height: 24px;
+      width: 24px;
+      height: 24px;
       border-radius: 999px;
       display: inline-flex;
       align-items: center;
@@ -383,7 +464,8 @@
     }
 
     .filters-header-icon {
-      width: 24px; height: 24px;
+      width: 24px;
+      height: 24px;
       border-radius: 999px;
       display: inline-flex;
       align-items: center;
@@ -413,8 +495,10 @@
       flex-direction: column;
       justify-content: space-between;
       box-shadow: var(--shadow-card);
-      transition: box-shadow var(--transition-med), transform var(--transition-fast),
-                  border-color var(--transition-fast), background var(--transition-fast);
+      transition: box-shadow var(--transition-med),
+                  transform var(--transition-fast),
+                  border-color var(--transition-fast),
+                  background var(--transition-fast);
     }
     .card:hover {
       box-shadow: var(--shadow-card-strong);
@@ -437,7 +521,8 @@
     .kpi-label { flex: 1; }
 
     .kpi-icon {
-      width: 1.25rem; height: 1.25rem;
+      width: 1.25rem;
+      height: 1.25rem;
       border-radius: 999px;
       display: inline-flex;
       align-items: center;
@@ -452,13 +537,17 @@
     .kpi-icon.upcoming { background: var(--amber); }
 
     .kpi-value {
-      font-size: 1.35rem;
+      font-size: 1.55rem;
       font-weight: 600;
       margin-bottom: 1px;
       color: var(--accent);
     }
 
-    .kpi-caption { font-size: var(--font-xs); color: var(--muted); line-height: 1.4; }
+    .kpi-caption {
+      font-size: var(--font-xs);
+      color: var(--muted);
+      line-height: 1.4;
+    }
 
     .filters-header {
       max-width: 72rem;
@@ -557,6 +646,9 @@
       max-width: 72rem;
       position: relative;
     }
+    .filter-bar[hidden] {
+      display: none !important;
+    }
     .filter-bar.dragover::after {
       content: "Drop CSV or Excel file to upload";
       position: absolute;
@@ -592,7 +684,9 @@
       min-width: 0;
     }
 
-    .filter-group.search-group { grid-column: span 2; }
+    .filter-group.search-group {
+      grid-column: span 2;
+    }
     @media (max-width: 960px) {
       .filter-group.search-group { grid-column: span 3; }
     }
@@ -608,6 +702,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 0.25rem;
     }
 
     .filter-control {
@@ -618,7 +713,9 @@
       background: #f9fafb;
       color: var(--text);
       width: 100%;
-      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+      transition: border-color var(--transition-fast),
+                  box-shadow var(--transition-fast),
+                  background var(--transition-fast);
     }
 
     .filter-control:focus-visible {
@@ -632,14 +729,20 @@
     .filter-search-wrap { position: relative; }
     .filter-search-icon {
       position: absolute;
-      top: 50%; left: 0.4rem;
+      top: 50%;
+      left: 0.4rem;
       transform: translateY(-50%);
       color: var(--muted);
       pointer-events: none;
     }
-    .filter-search { padding-left: 1.5rem; }
+    .filter-search {
+      padding-left: 1.5rem;
+    }
 
-    .multiselect { position: relative; font-size: var(--font-xs); }
+    .multiselect {
+      position: relative;
+      font-size: var(--font-xs);
+    }
 
     .multiselect-display {
       display: flex;
@@ -652,7 +755,9 @@
       background: #f9fafb;
       cursor: pointer;
       min-height: 1.9rem;
-      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+      transition: border-color var(--transition-fast),
+                  box-shadow var(--transition-fast),
+                  background var(--transition-fast);
     }
 
     .multiselect-display:focus-visible {
@@ -663,7 +768,9 @@
       box-shadow: 0 0 0 1px rgba(37,99,235,0.4);
     }
 
-    .multiselect-display span.placeholder { color: #9ca3af; }
+    .multiselect-display span.placeholder {
+      color: #9ca3af;
+    }
 
     .multiselect-display-items {
       display: flex;
@@ -672,7 +779,11 @@
       overflow: hidden;
     }
 
-    .multiselect-arrow { font-size: 0.6rem; color: var(--muted); flex-shrink: 0; }
+    .multiselect-arrow {
+      font-size: 0.6rem;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
 
     .multiselect-clear {
       border: none;
@@ -688,7 +799,8 @@
       position: absolute;
       z-index: 30;
       top: calc(100% + 4px);
-      left: 0; right: 0;
+      left: 0;
+      right: 0;
       background: var(--surface);
       border-radius: 0.5rem;
       border: 1px solid var(--border);
@@ -699,7 +811,9 @@
       display: none;
     }
 
-    .multiselect-menu[data-open="true"] { display: block; }
+    .multiselect-menu[data-open="true"] {
+      display: block;
+    }
 
     .multiselect-option {
       display: flex;
@@ -710,9 +824,14 @@
       cursor: pointer;
     }
 
-    .multiselect-option input { accent-color: var(--accent); cursor: pointer; }
+    .multiselect-option input {
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
 
-    .multiselect-option:hover { background: var(--accent-soft); }
+    .multiselect-option:hover {
+      background: var(--accent-soft);
+    }
 
     .multiselect-empty {
       padding: 0.4rem 0.65rem;
@@ -738,7 +857,10 @@
       border-top: 1px dashed var(--border);
     }
 
-    .filter-actions-left { font-size: var(--font-xs); color: var(--muted); }
+    .filter-actions-left {
+      font-size: var(--font-xs);
+      color: var(--muted);
+    }
 
     .filter-actions-right {
       display: flex;
@@ -772,7 +894,9 @@
       color: var(--text);
     }
 
-    .filter-chip-label { font-weight: 500; }
+    .filter-chip-label {
+      font-weight: 500;
+    }
 
     .filter-chip-clear,
     .filter-chip-clear-all {
@@ -800,9 +924,35 @@
       max-width: 100%;
       position: relative;
       overflow: hidden;
-      min-height: 180px;
+      min-height: 230px;
     }
-    .portfolio-chart-wrap { padding-top: 4px; margin-top: 4px; }
+
+    .portfolio-chart-wrap {
+      padding-top: 0;
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .industry-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .industry-chart-scroll {
+      max-height: 320px;
+      overflow-y: auto;
+      padding-right: 2px;
+    }
+    .industry-chart-inner {
+      position: relative;
+      min-height: 200px;
+    }
+    #industryChart {
+      display: block;
+      width: 100% !important;
+    }
 
     .chart-empty-overlay {
       position: absolute;
@@ -828,16 +978,16 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1.35rem;
       font-weight: 600;
       color: var(--text);
       pointer-events: none;
+      text-align: center;
     }
-
     .donut-caption {
       font-size: var(--font-xs);
       font-weight: 400;
-      margin-top: 0.1rem;
+      margin-top: 0.15rem;
       color: var(--muted);
     }
 
@@ -851,7 +1001,11 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .section-title { font-size: var(--font-md); font-weight: 600; color: var(--text); }
+    .section-title {
+      font-size: var(--font-md);
+      font-weight: 600;
+      color: var(--text);
+    }
 
     .pill {
       padding: 0.18rem 0.55rem;
@@ -893,11 +1047,17 @@
       color: var(--text);
       background: var(--surface);
     }
-    html[data-theme="dark"] table.data-table { border-color: #374151; }
+    html[data-theme="dark"] table.data-table {
+      border-color: #374151;
+    }
 
-    table.data-table.compact { font-size: 0.75rem; }
+    table.data-table.compact {
+      font-size: 0.75rem;
+    }
     table.data-table.compact th,
-    table.data-table.compact td { padding: 0.3rem 0.4rem; }
+    table.data-table.compact td {
+      padding: 0.3rem 0.4rem;
+    }
 
     .data-table thead {
       background: #e5e7eb;
@@ -921,15 +1081,19 @@
       font-weight: 400;
     }
     html[data-theme="dark"] .data-table th,
-    html[data-theme="dark"] .data-table td { border-color: #374151; }
+    html[data-theme="dark"] .data-table td {
+      border-color: #374151;
+    }
 
     .data-table th:last-child,
-    .data-table td:last-child { border-right: 1px solid #e5e7eb; }
+    .data-table td:last-child {
+      border-right: 1px solid #e5e7eb;
+    }
 
     .data-table th {
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       color: var(--muted);
       cursor: pointer;
       white-space: nowrap;
@@ -948,10 +1112,16 @@
       opacity: 0.8;
     }
 
-    .data-table tbody tr:nth-child(even) td { background: #ffffff; }
-    html[data-theme="dark"] .data-table tbody tr:nth-child(even) td { background: #020617; }
+    .data-table tbody tr:nth-child(even) td {
+      background: #ffffff;
+    }
+    html[data-theme="dark"] .data-table tbody tr:nth-child(even) td {
+      background: #020617;
+    }
 
-    .data-table tbody tr:hover td { background: rgba(220,105,0,0.06); }
+    .data-table tbody tr:hover td {
+      background: rgba(220,105,0,0.06);
+    }
 
     .data-table td.col-name,
     .data-table td.col-capability,
@@ -987,7 +1157,9 @@
       text-align: center;
     }
     html[data-theme="dark"] .status-pill,
-    html[data-theme="dark"] .rag-pill { background: #020617; }
+    html[data-theme="dark"] .rag-pill {
+      background: #020617;
+    }
 
     .status-dot,
     .rag-dot {
@@ -1025,9 +1197,9 @@
       justify-content: space-between;
       align-items: flex-start;
       gap: 0.75rem;
-      padding-bottom: 0.45rem;
+      padding-bottom: 0.35rem;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
     .portfolio-title {
@@ -1076,12 +1248,14 @@
       background: var(--surface);
       border-radius: 0.5rem;
       border: 1px solid var(--border);
-      padding: 0.55rem 0.65rem 0.65rem;
+      padding: 0.45rem 0.55rem 0.45rem;
       box-shadow: 0 0 0 1px rgba(15,23,42,0.01);
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      transition: box-shadow var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
+      transition: box-shadow var(--transition-fast),
+                  transform var(--transition-fast),
+                  border-color var(--transition-fast);
     }
     .portfolio-panel:hover {
       box-shadow: var(--shadow-card-strong);
@@ -1093,8 +1267,8 @@
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 0.5rem;
-      margin-bottom: 0.4rem;
+      gap: 0.35rem;
+      margin-bottom: 0.15rem;
     }
 
     .panel-title {
@@ -1106,24 +1280,16 @@
     .panel-subtitle {
       font-size: var(--font-xs);
       color: var(--muted);
+      margin-top: 0.1rem;
     }
 
     .panel-actions {
       display: flex;
       align-items: center;
       gap: 0.25rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
-
-    .industry-summary-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-      margin-bottom: 0.35rem;
-      font-size: var(--font-xs);
-    }
-
-    .industry-count { font-weight: 600; margin-right: 0.25rem; }
 
     .metrics-summary {
       font-size: var(--font-xs);
@@ -1159,7 +1325,9 @@
       margin: 0.25rem 0 0;
       padding-left: 1.1rem;
     }
-    .getting-started-steps li { margin-bottom: 0.15rem; }
+    .getting-started-steps li {
+      margin-bottom: 0.15rem;
+    }
 
     .getting-started.is-hidden { display: none; }
 
@@ -1167,7 +1335,8 @@
       position: absolute;
       width: 1px;
       height: 1px;
-      padding: 0; margin: -1px;
+      padding: 0;
+      margin: -1px;
       overflow: hidden;
       clip: rect(0,0,0,0);
       white-space: nowrap;
@@ -1192,12 +1361,27 @@
     }
 
     @media (max-width: 640px) {
-      .header-row { flex-direction: column; align-items: flex-start; }
-      .header-right { align-items: flex-start; }
-      .top-bar-inner { flex-wrap: wrap; }
-      .filters-header { flex-direction: column; align-items: flex-start; }
-      .filters-header-right { width: 100%; justify-content: flex-start; }
-      .top-bar-title { white-space: normal; }
+      .header-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .header-right {
+        align-items: flex-start;
+      }
+      .top-bar-inner {
+        flex-wrap: wrap;
+      }
+      .filters-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .filters-header-right {
+        width: 100%;
+        justify-content: flex-start;
+      }
+      .top-bar-title {
+        white-space: normal;
+      }
     }
 
     @media print {
@@ -1210,7 +1394,9 @@
         --shadow-card: none;
       }
 
-      body { background: #ffffff !important; }
+      body {
+        background: #ffffff !important;
+      }
 
       .top-bar,
       .message-bar,
@@ -1231,11 +1417,24 @@
         margin: 0;
         border-radius: 0;
         padding: 0.5rem 0.25rem;
+        border: none;
       }
 
       .table-wrap {
         max-height: none !important;
         overflow: visible !important;
+      }
+    }
+
+    .los-territory-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 0.85rem;
+      margin-top: 0.45rem;
+    }
+    @media (max-width: 960px) {
+      .los-territory-strip {
+        grid-template-columns: minmax(0,1fr);
       }
     }
   </style>
@@ -1245,7 +1444,7 @@
   <div class="top-bar" role="banner">
     <div class="top-bar-inner">
       <div>
-        <div class="top-bar-title">Business Analysis & Product Management Team</div>
+        <div class="top-bar-title">Business Analysis &amp; Product Management Team</div>
       </div>
       <div class="top-bar-right">
         <label class="theme-toggle" title="Toggle dark mode">
@@ -1272,15 +1471,13 @@
       </div>
     </div>
   </div>
-
   <main role="main">
     <div class="page">
       <header class="header-row" aria-label="Dashboard header">
         <div class="heading-block">
-          <h1 class="heading">All project portfolio – Executive View</h1>
+          <h1 class="heading">All Project Portfolio – Executive View</h1>
           <p class="subheading">
-            High‑level view of portfolio duration, risk profile and client coverage.
-            Upload your latest CSV or Excel portfolio file to update the analysis. All parsing happens in your browser.
+            Single View Of Portfolio Delivery, Risk, Client Coverage and LoS for the Business Analysis &amp; Product Management team.
           </p>
         </div>
         <div class="header-right">
@@ -1302,6 +1499,7 @@
 
       <p class="timestamp" id="asOf" aria-live="polite">As of —</p>
 
+
       <div class="filters-header" id="filtersHeader" aria-label="Filter summary">
         <div class="filters-header-left">
           <span class="filters-header-icon" aria-hidden="true">
@@ -1316,9 +1514,6 @@
           </span>
           <div>
             <div class="filters-header-title">Filters</div>
-            <div class="filters-header-subtitle">
-              Multi‑select filters split comma‑separated values; LoS matches any selected LoS for a project.
-            </div>
           </div>
         </div>
 
@@ -1379,7 +1574,9 @@
           </div>
 
           <div class="filter-group">
-            <label class="filter-label" for="filterIndustry">Industry</label>
+            <label class="filter-label" for="filterIndustry">
+              Industry
+            </label>
             <div class="multiselect" data-key="industry" id="filterIndustry">
               <div class="multiselect-display" tabindex="0" role="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="filterIndustryMenu">
                 <div class="multiselect-display-items">
@@ -1494,8 +1691,7 @@
               <span class="filter-search-icon" aria-hidden="true">
                 <svg class="filter-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/>
-                  <line x1="16" y1="16" x2="21" y2="21" stroke="currentColor" stroke-width="1.6"
-                        stroke-linecap="round"/>
+                  <line x1="16" y1="16" x2="21" y2="21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
                 </svg>
               </span>
               <input id="filterSearch" class="filter-control filter-search" type="text"
@@ -1578,16 +1774,18 @@
         </article>
       </section>
 
-      <p class="metrics-summary" id="metricsSummary" aria-live="polite">No projects in view. Upload data from a CSV or Excel file to get started.</p>
+      <p class="metrics-summary" id="metricsSummary" aria-live="polite">
+        No projects in view. Upload data from a CSV or Excel file to get started.
+      </p>
 
       <section id="gettingStarted" class="getting-started" aria-label="Getting started" aria-hidden="false">
         <div class="getting-started-title">Load your portfolio to begin</div>
         <p style="margin:4px 0 6px;">
-          Data stays in your browser. No information is sent to a server. CSV and Excel files are parsed locally.
+          Data stays in your browser – nothing is uploaded to a server. CSV and Excel files are parsed locally for security and speed.
         </p>
         <ol class="getting-started-steps">
-          <li>Prepare your CSV or Excel file (one row per project).</li>
-          <li>Use “Upload (CSV / Excel)” or drag-and-drop onto the filter bar to load your data.</li>
+          <li>Use your existing portfolio export (CSV or Excel, one row per project).</li>
+          <li>Click “Upload (CSV / Excel)” or drag‑and‑drop the file onto the filter bar to refresh this dashboard.</li>
         </ol>
       </section>
 
@@ -1596,7 +1794,7 @@
           <div>
             <h2 class="portfolio-title">Portfolio analysis</h2>
             <p class="portfolio-subtitle">
-              Duration profile, risk profile and industry concentration (current filters).
+              Coverage, duration and risk profile for the filtered portfolio, plus LoS split in key territories.
             </p>
           </div>
           <div class="portfolio-meta">
@@ -1605,51 +1803,58 @@
           </div>
         </div>
 
-        <div class="portfolio-grid">
+        <!-- ROW 1 – RAG distribution + Projects by industry -->
+        <div class="portfolio-grid" style="margin-bottom:0.85rem;">
+          <!-- RAG DONUT -->
           <article class="portfolio-panel" aria-label="RAG distribution">
             <div class="portfolio-panel-header">
               <div>
                 <span class="panel-title">RAG distribution</span><br>
-                <span class="panel-subtitle">Risk split across the portfolio</span>
+                <span class="panel-subtitle" id="ragSubtitle">
+                  Risk split across projects with a defined RAG rating (Green / Amber / Red).
+                </span>
               </div>
               <div class="panel-actions">
-                <button class="btn btn-secondary btn-small" type="button" data-export-chart="ragDonut" aria-label="Export RAG chart as PNG">Export PNG</button>
+                <button class="btn btn-secondary btn-small" type="button"
+                        data-export-chart="ragDonut"
+                        aria-label="Export RAG chart as PNG">
+                  Export RAG PNG
+                </button>
               </div>
             </div>
-            <div class="panel-body">
-              <div class="chart-wrap portfolio-chart-wrap" role="img" aria-label="Projects by RAG status">
-                <canvas id="ragDonut"></canvas>
-                <div class="chart-empty-overlay" id="ragEmpty" style="display:flex;">
-                  No RAG status in this view. Assign Green / Amber / Red to see risk split.
-                </div>
-                <div class="donut-center" id="ragDonutCenter">
-                  –
-                  <div class="donut-caption">Projects with RAG set</div>
-                </div>
+            <div class="chart-wrap portfolio-chart-wrap"
+                 role="img"
+                 aria-label="Projects by RAG status (Green, Amber, Red)">
+              <canvas id="ragDonut"></canvas>
+              <div class="chart-empty-overlay" id="ragEmpty" style="display:flex;">
+                No RAG data in this view. Assign Green / Amber / Red to see the risk split.
+              </div>
+              <div class="donut-center" id="ragDonutCenter">
+                <span id="ragDonutNumber">–</span>
+                <div class="donut-caption" id="ragDonutCaption">Projects with RAG set</div>
               </div>
             </div>
           </article>
 
-          <article class="portfolio-panel" aria-label="Projects by industry">
+          <!-- Projects by industry -->
+          <article class="portfolio-panel industry-panel" aria-label="Projects by industry">
             <div class="portfolio-panel-header">
               <div>
                 <span class="panel-title">Projects by industry</span><br>
-                <span class="panel-subtitle">Top industries by project count</span>
+                <span class="panel-subtitle" id="industrySubtitle">
+                  Number of projects per industry. Scroll if the list is long.
+                </span>
               </div>
               <div class="panel-actions">
-                <button class="btn btn-secondary btn-small" type="button" data-export-chart="industryChart" aria-label="Export industry chart as PNG">Export PNG</button>
+                <button class="btn btn-secondary btn-small" type="button"
+                        data-export-chart="industryChart"
+                        aria-label="Export industry chart as PNG">
+                  Export industry PNG
+                </button>
               </div>
             </div>
-            <div class="panel-body">
-              <div class="industry-summary-row">
-                <div class="industry-summary-main">
-                  <span id="industryTotalProjects" class="industry-count">–</span>
-                  <span class="industry-label">projects across selected industries</span>
-                </div>
-                <div class="industry-summary-legend" aria-hidden="true"></div>
-              </div>
-
-              <div class="chart-wrap portfolio-chart-wrap" role="img" aria-label="Top industries by project count">
+            <div class="industry-chart-scroll">
+              <div class="industry-chart-inner">
                 <canvas id="industryChart"></canvas>
                 <div class="chart-empty-overlay" id="industryEmpty" style="display:flex;">
                   No industry data in the current view.
@@ -1657,63 +1862,141 @@
               </div>
             </div>
           </article>
+        </div>
 
+        <!-- ROW 2 – Projects by duration range + Projects by territory -->
+        <div class="portfolio-grid" style="margin-bottom:0.85rem;">
+          <!-- DURATION BUCKETS (LEFT) -->
           <article class="portfolio-panel" aria-label="Projects by duration range">
             <div class="portfolio-panel-header">
               <div>
                 <span class="panel-title">Projects by duration range</span><br>
-                <span class="panel-subtitle">Number of projects by duration bucket</span>
+                <span class="panel-subtitle" id="durationSubtitle">
+                  Projects grouped by planned duration (months) based on valid start/end dates.
+                </span>
               </div>
               <div class="panel-actions">
-                <button class="btn btn-secondary btn-small" type="button" data-export-chart="statusChart" aria-label="Export duration chart as PNG">Export PNG</button>
+                <button class="btn btn-secondary btn-small" type="button"
+                        data-export-chart="statusChart"
+                        aria-label="Export duration chart as PNG">
+                  Export duration PNG
+                </button>
               </div>
             </div>
-            <div class="panel-body">
-              <div class="chart-wrap portfolio-chart-wrap" role="img" aria-label="Projects by duration bucket">
-                <canvas id="statusChart"></canvas>
-                <div class="chart-empty-overlay" id="statusEmpty" style="display:flex;">
-                  No duration data in this view.
-                </div>
+            <div class="chart-wrap portfolio-chart-wrap"
+                 role="img"
+                 aria-label="Projects by duration bucket">
+              <canvas id="statusChart"></canvas>
+              <div class="chart-empty-overlay" id="statusEmpty" style="display:flex;">
+                No duration data in this view (missing or invalid start/end dates).
               </div>
             </div>
           </article>
 
+          <!-- TERRITORY (RIGHT) -->
           <article class="portfolio-panel" aria-label="Projects by territory">
             <div class="portfolio-panel-header">
               <div>
                 <span class="panel-title">Projects by territory</span><br>
-                <span class="panel-subtitle">Where work is being delivered</span>
+                <span class="panel-subtitle">
+                  Where the projects are delivered (territory field in your data).
+                </span>
               </div>
               <div class="panel-actions">
-                <button class="btn btn-secondary btn-small" type="button" data-export-chart="territoryChart" aria-label="Export territory chart as PNG">Export PNG</button>
+                <button class="btn btn-secondary btn-small" type="button"
+                        data-export-chart="territoryChart"
+                        aria-label="Export territory chart as PNG">
+                  Export territory PNG
+                </button>
               </div>
             </div>
-            <div class="panel-body">
-              <div class="chart-wrap portfolio-chart-wrap" role="img" aria-label="Projects by territory">
-                <canvas id="territoryChart"></canvas>
-                <div class="chart-empty-overlay" id="territoryEmpty" style="display:flex;">
-                  No territory data in the current view.
-                </div>
+            <div class="chart-wrap portfolio-chart-wrap"
+                 role="img"
+                 aria-label="Projects by territory">
+              <canvas id="territoryChart"></canvas>
+              <div class="chart-empty-overlay" id="territoryEmpty" style="display:flex;">
+                No territory data in the current view.
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- ROW 3 – LoS by key territories (DE / UK / ME) -->
+        <div class="los-territory-strip">
+          <!-- LoS – DE -->
+          <article class="portfolio-panel" aria-label="LoS – Germany (DE)">
+            <div class="portfolio-panel-header">
+              <div>
+                <span class="panel-title">LoS – DE</span><br>
+                <span class="panel-subtitle" id="losSubtitleDE">
+                  LoS split for projects where territory is Germany (DE).
+                </span>
+              </div>
+              <div class="panel-actions">
+                <button class="btn btn-secondary btn-small" type="button"
+                        data-export-chart="LoSChartDE" aria-label="Export LoS chart for DE as PNG">
+                  Export DE PNG
+                </button>
+              </div>
+            </div>
+            <div class="chart-wrap portfolio-chart-wrap"
+                 role="img"
+                 aria-label="Projects by LoS – Germany (DE)">
+              <canvas id="LoSChartDE"></canvas>
+              <div class="chart-empty-overlay" id="LoSEmptyDE" style="display:flex;">
+                No LoS data for DE in the current view.
               </div>
             </div>
           </article>
 
-          <article class="portfolio-panel" aria-label="Projects by LoS">
+          <!-- LoS – UK -->
+          <article class="portfolio-panel" aria-label="LoS – United Kingdom (UK)">
             <div class="portfolio-panel-header">
               <div>
-                <span class="panel-title">Projects by LoS</span><br>
-                <span class="panel-subtitle">Top LoS by project count</span>
+                <span class="panel-title">LoS – UK</span><br>
+                <span class="panel-subtitle" id="losSubtitleUK">
+                  LoS split for projects where territory is the United Kingdom (UK).
+                </span>
               </div>
               <div class="panel-actions">
-                <button class="btn btn-secondary btn-small" type="button" data-export-chart="LoSChart" aria-label="Export LoS chart as PNG">Export PNG</button>
+                <button class="btn btn-secondary btn-small" type="button"
+                        data-export-chart="LoSChartUK" aria-label="Export LoS chart for UK as PNG">
+                  Export UK PNG
+                </button>
               </div>
             </div>
-            <div class="panel-body">
-              <div class="chart-wrap portfolio-chart-wrap" role="img" aria-label="Projects by LoS">
-                <canvas id="LoSChart"></canvas>
-                <div class="chart-empty-overlay" id="LoSEmpty" style="display:flex;">
-                  No LoS data in the current view.
-                </div>
+            <div class="chart-wrap portfolio-chart-wrap"
+                 role="img"
+                 aria-label="Projects by LoS – United Kingdom (UK)">
+              <canvas id="LoSChartUK"></canvas>
+              <div class="chart-empty-overlay" id="LoSEmptyUK" style="display:flex;">
+                No LoS data for UK in the current view.
+              </div>
+            </div>
+          </article>
+
+          <!-- LoS – ME -->
+          <article class="portfolio-panel" aria-label="LoS – Middle East (ME)">
+            <div class="portfolio-panel-header">
+              <div>
+                <span class="panel-title">LoS – ME</span><br>
+                <span class="panel-subtitle" id="losSubtitleME">
+                  LoS split for projects where territory is Middle East (ME).
+                </span>
+              </div>
+              <div class="panel-actions">
+                <button class="btn btn-secondary btn-small" type="button"
+                        data-export-chart="LoSChartME" aria-label="Export LoS chart for ME as PNG">
+                  Export ME PNG
+                </button>
+              </div>
+            </div>
+            <div class="chart-wrap portfolio-chart-wrap"
+                 role="img"
+                 aria-label="Projects by LoS – Middle East (ME)">
+              <canvas id="LoSChartME"></canvas>
+              <div class="chart-empty-overlay" id="LoSEmptyME" style="display:flex;">
+                No LoS data for ME in the current view.
               </div>
             </div>
           </article>
@@ -1730,55 +2013,55 @@
           <table class="data-table" id="projectsTable" aria-describedby="projectsCount tableInfo">
             <thead>
             <tr>
-              <th data-key="name"        scope="col" class="col-name"       role="button">
+              <th data-key="name"        scope="col" class="col-name">
                 Project Name <span class="sort-indicator" aria-hidden="true"></span>
               </th>
-              <th data-key="capability"  scope="col" class="col-capability" role="button">
+              <th data-key="capability"  scope="col" class="col-capability">
                 Capability <span class="sort-indicator" aria-hidden="true"></span>
               </th>
-              <th data-key="status"      scope="col" class="col-status"     role="button">
+              <th data-key="status"      scope="col" class="col-status">
                 Status <span class="sort-indicator" aria-hidden="true"></span>
               </th>
-              <th data-key="rag"         scope="col" class="col-rag"        role="button">
+              <th data-key="rag"         scope="col" class="col-rag">
                 RAG <span class="sort-indicator" aria-hidden="true"></span>
               </th>
-              <th data-key="start"       scope="col" class="col-date"       role="button">
+              <th data-key="start"       scope="col" class="col-date">
                 Start_Date <span class="sort-indicator" aria-hidden="true"></span>
               </th>
-              <th data-key="end"         scope="col" class="col-date"       role="button">
+              <th data-key="end"         scope="col" class="col-date">
                 End_Date <span class="sort-indicator" aria-hidden="true"></span>
               </th>
-              <th data-key="durationMonths" scope="col" class="col-short"   role="button">
+              <th data-key="durationMonths" scope="col" class="col-short">
                 Duration (months) <span class="sort-indicator" aria-hidden="true"></span>
               </th>
-              <th data-key="territory"   scope="col" class="col-territory"  role="button">
+              <th data-key="territory"   scope="col" class="col-territory">
                 Territory <span class="sort-indicator" aria-hidden="true"></span>
               </th>
-              <th data-key="client"      scope="col" class="col-client"     role="button">
+              <th data-key="client"      scope="col" class="col-client">
                 Client <span class="sort-indicator" aria-hidden="true"></span>
               </th>
-              <th data-key="multiTower"  scope="col" class="col-short"      role="button">
+              <th data-key="multiTower"  scope="col" class="col-short">
                 Multi Tower <span class="sort-indicator" aria-hidden="true"></span>
               </th>
-              <th data-key="resources"   scope="col" class="col-short"      role="button">
+              <th data-key="resources"   scope="col" class="col-short">
                 Team Resources <span class="sort-indicator" aria-hidden="true"></span>
               </th>
-              <th data-key="industry"    scope="col" class="col-capability" role="button">
+              <th data-key="industry"    scope="col" class="col-capability">
                 Industry <span class="sort-indicator" aria-hidden="true"></span>
               </th>
-              <th data-key="LoS"         scope="col" class="col-short los-col" role="button">
+              <th data-key="LoS"         scope="col" class="col-short los-col">
                 LoS <span class="sort-indicator" aria-hidden="true"></span>
               </th>
-              <th data-key="partner"     scope="col" class="col-short"      role="button">
+              <th data-key="partner"     scope="col" class="col-short">
                 Engagement Lead/Partner <span class="sort-indicator" aria-hidden="true"></span>
               </th>
-              <th data-key="utilisation" scope="col" class="col-short"      role="button">
+              <th data-key="utilisation" scope="col" class="col-short">
                 Team Utilization % <span class="sort-indicator" aria-hidden="true"></span>
               </th>
-              <th data-key="scope"       scope="col" class="col-notes"      role="button">
+              <th data-key="scope"       scope="col" class="col-notes">
                 Project Scope <span class="sort-indicator" aria-hidden="true"></span>
               </th>
-              <th data-key="risks"       scope="col" class="col-notes"      role="button">
+              <th data-key="risks"       scope="col" class="col-notes">
                 Risks/Challenges <span class="sort-indicator" aria-hidden="true"></span>
               </th>
             </tr>
@@ -1791,8 +2074,8 @@
           <div style="display:flex; gap:6px; flex-wrap:wrap;">
             <button class="btn" id="toggleDensity" aria-pressed="false" type="button">Compact view</button>
             <button class="btn btn-secondary" id="btnExportCsv" type="button">Export CSV</button>
-            <button class="btn btn-secondary" id="printModeToggle" type="button">Print‑friendly view</button>
-            <button class="btn btn-secondary" id="btnDownloadHtml" type="button">Download </button>
+            <button class="btn btn-secondary" id="printModeToggle" type="button" aria-pressed="false">Print / PDF mode</button>
+            <button class="btn btn-secondary" id="btnDownloadHtml" type="button">Download</button>
             <button class="btn btn-secondary btn-print-now-hidden" id="btnPrintNow" type="button">Print</button>
           </div>
         </div>
@@ -1811,25 +2094,24 @@
 <footer class="site-footer">
   <div class="site-footer-inner">
     <span></span>
-    <span>© Copyright Omar Eleraky</span>
+    <span>PwC internal tool – © Copyright Omar Eleraky</span>
   </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
-<script src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-
-<script>
-  window.embeddedData = [];
-  window.embeddedFilters = null;
-  window.embeddedSort = null;
-</script>
 
 <script>
 (function registerDatalabels() {
   if (window.Chart && window.ChartDataLabels) {
     try { window.Chart.register(window.ChartDataLabels); } catch (e) { console.error(e); }
+  } else {
+    window.addEventListener('load', function () {
+      if (window.Chart && window.ChartDataLabels) {
+        try { window.Chart.register(window.ChartDataLabels); } catch (e) { console.error(e); }
+      }
+    });
   }
 })();
 
@@ -1871,12 +2153,10 @@
     return result;
   };
 })();
+</script>
 
+<script>
 const Dashboard = (function() {
-  function safeMatchMedia(q) {
-    try { return window.matchMedia && window.matchMedia(q); } catch { return null; }
-  }
-
   function parseDate(value) {
     if (value == null) return null;
     let s = String(value).trim();
@@ -2002,6 +2282,7 @@ const Dashboard = (function() {
     const bar=document.getElementById('messageBarInner');
     const textEl=document.getElementById('messageBarText');
     const closeBtn=document.getElementById('messageBarClose');
+    let timerId = null;
     if(closeBtn&&bar){
       closeBtn.addEventListener('click',()=>{bar.style.display='none';});
     }
@@ -2010,8 +2291,9 @@ const Dashboard = (function() {
       textEl.textContent=msg;
       bar.className='message-bar-inner '+type;
       bar.style.display='flex';
+      if(timerId) clearTimeout(timerId);
       if(ms){
-        setTimeout(()=>{ if(bar.style.display==='flex') bar.style.display='none';},ms);
+        timerId = setTimeout(()=>{ if(bar.style.display==='flex') bar.style.display='none';},ms);
       }
     }
     return {show};
@@ -2161,6 +2443,7 @@ const Dashboard = (function() {
       const capabilityNorm=normaliseNamesString(rawCapability);
       const resourcesNorm=normaliseNamesString(rawResources);
       const multiTowerNorm=normaliseNamesString(rawMultiTower);
+
       const industryNorm=normaliseNamesString(rawIndustry);
       const partnerNorm=normaliseNamesString(rawPartner);
       const territoryNorm=normaliseNamesString(rawTerritory);
@@ -2187,11 +2470,11 @@ const Dashboard = (function() {
         start:startDate,
         end:endDate,
         durationMonths,
-        territory:territoryNorm||'Unspecified',
+        territory:territoryNorm || 'Unspecified',
         client:(rawClient||'').trim(),
         multiTower:multiTowerNorm,
         resources:resourcesNorm,
-        industry:industryNorm||'Unspecified',
+        industry:industryNorm || 'Unspecified',
         LoS:LoSCanonical,
         LoSLower:LoSCanonicalLower,
         LoSDisplay,
@@ -2233,12 +2516,29 @@ const Dashboard = (function() {
           a['unspecified']=(a['unspecified']||0)+1;
         }else{
           arr.forEach(name=>{
-            const k=(name||'unspecified').toLowerCase();
+            const k=(name || 'unspecified').toLowerCase();
             a[k]=(a[k]||0)+1;
           });
         }
         return a;
       },{});
+
+      const LoSByTerritory = rows.reduce((acc, r) => {
+        const terr = (r.territory || 'Unspecified').toString();
+        if (!acc[terr]) acc[terr] = {};
+        const terrMap = acc[terr];
+
+        const arr = Array.isArray(r.LoSLower) ? r.LoSLower : [];
+        if (!arr.length) {
+          terrMap['unspecified'] = (terrMap['unspecified'] || 0) + 1;
+        } else {
+          arr.forEach(name => {
+            const k = (name || 'unspecified').toLowerCase();
+            terrMap[k] = (terrMap[k] || 0) + 1;
+          });
+        }
+        return acc;
+      }, {});
 
       const today=new Date();
       const upcoming30=new Date(today.getTime()+30*86400000);
@@ -2267,6 +2567,7 @@ const Dashboard = (function() {
         industryCounts,
         territoryCounts,
         LoSCounts,
+        LoSByTerritory,
         upcoming,
         avgDuration,
         uniqueClients:clients.size,
@@ -2368,6 +2669,22 @@ const Dashboard = (function() {
     }
 
     function attachHandlers(onChange){
+      const docClickHandler = (e) => {
+        KEYS.forEach(key => {
+          const id='filter'+key.charAt(0).toUpperCase()+key.slice(1);
+          const root=document.getElementById(id);
+          if(!root) return;
+          const menu=root.querySelector('.multiselect-menu');
+          const display=root.querySelector('.multiselect-display');
+          if(!menu || !display) return;
+          if(!root.contains(e.target)){
+            menu.dataset.open='false';
+            display.setAttribute('aria-expanded','false');
+          }
+        });
+      };
+      document.addEventListener('click', docClickHandler);
+
       KEYS.forEach(key=>{
         const id='filter'+key.charAt(0).toUpperCase()+key.slice(1);
         const root=document.getElementById(id);
@@ -2397,16 +2714,15 @@ const Dashboard = (function() {
         if(menu){
           menu.addEventListener('change',()=>{
             const s=getState();
-            const sel=Array.from(menu.querySelectorAll('input[type="checkbox"]:checked')).map(i=>i.value);
+            const sel=Array.from(menu.querySelectorAll('input[type="checkbox"]'))
+              .filter(i=>i.checked)
+              .map(i=>i.value);
             s[key]=sel;
             saveState(s);
             applySelectionsToDom();
             if(typeof onChange==='function') onChange();
           });
         }
-        document.addEventListener('click',e=>{
-          if(!root.contains(e.target)) toggleMenu(false);
-        });
       });
     }
 
@@ -2542,26 +2858,40 @@ const Dashboard = (function() {
   })();
 
   const Charts=(function(){
-    let statusChart=null, industryChart=null, territoryChart=null, ragChart=null, LoSChart=null;
+    let statusChart=null, territoryChart=null, ragChart=null, industryChart=null;
+
     function ensureChartAvailable(){return typeof Chart!=='undefined';}
     function hasDatalabels(){return !!(window.Chart && window.ChartDataLabels);}
 
-    function buildStatusChart(_statusCounts,onClickFilter,rowsForDuration){
+    function buildStatusChart(rowsForDuration){
       if(!ensureChartAvailable()) return;
       const ctx=document.getElementById('statusChart');
       const empty=document.getElementById('statusEmpty');
+      const subtitle=document.getElementById('durationSubtitle');
       if(!ctx) return;
+
       const labels=['0 – 6 months','6 – 12 months','More than 1 year'];
       const counts={'0-6':0,'6-12':0,'12+':0};
+      let validDurationProjects=0;
+
       (rowsForDuration||[]).forEach(r=>{
         if(r.durationMonths==null||r.durationMonths<0) return;
+        validDurationProjects++;
         const m=r.durationMonths;
         if(m>=0&&m<=6) counts['0-6']++;
         else if(m>6&&m<=12) counts['6-12']++;
         else if(m>12) counts['12+']++;
       });
+
       const data=[counts['0-6'],counts['6-12'],counts['12+']];
       const hasData=data.some(v=>v>0);
+
+      if(subtitle){
+        subtitle.textContent = validDurationProjects
+          ? `Projects with valid dates: ${validDurationProjects.toLocaleString()}.`
+          : 'No valid start/end date pairs in this view.';
+      }
+
       if(empty) empty.style.display=hasData?'none':'flex';
       if(!hasData){
         if(statusChart) statusChart.destroy();
@@ -2573,7 +2903,9 @@ const Dashboard = (function() {
         data,
         backgroundColor:[colors.accent,'#9ca3af',colors.hold],
         borderWidth:0,
-        borderRadius:12
+        borderRadius:22,
+        maxBarThickness:60,
+        barThickness:46
       };
       const options={
         responsive:true,
@@ -2591,15 +2923,15 @@ const Dashboard = (function() {
           },
           datalabels: hasDatalabels()?{
             anchor:'end',align:'end',offset:4,color:colors.label,
-            font:{size:11,weight:'500'},
-            formatter:v=>v?`${v} proj`:''
+            font:{size:12,weight:'600'},
+            formatter:v=>v?`${v}`:''
           }:undefined
         },
         scales:{
-          x:{grid:{display:false},ticks:{color:colors.label}},
+          x:{grid:{display:false},ticks:{color:colors.label,font:{size:11}}},
           y:{
             beginAtZero:true,
-            ticks:{color:colors.label},
+            ticks:{color:colors.label,font:{size:11}},
             grid:{color:colors.grid},
             title:{display:true,text:'Number of projects',color:colors.label,font:{size:11}}
           }
@@ -2614,7 +2946,7 @@ const Dashboard = (function() {
           else if(label==='6 – 12 months') durationEl.value='6-12';
           else if(label==='More than 1 year') durationEl.value='12+';
           Filters.save();
-          App.applyFiltersAndRender();
+          Dashboard.App.applyFiltersAndRender();
         }
       };
       if(statusChart){
@@ -2624,81 +2956,6 @@ const Dashboard = (function() {
         statusChart.update();
       }else{
         statusChart=new Chart(ctx,{type:'bar',data:{labels,datasets:[dataset]},options});
-      }
-    }
-
-    function buildIndustryChart(industryCounts,onClickFilter){
-      if(!ensureChartAvailable()) return;
-      const ctx=document.getElementById('industryChart');
-      const empty=document.getElementById('industryEmpty');
-      if(!ctx) return;
-      const entries=Object.entries(industryCounts).sort((a,b)=>b[1]-a[1]).slice(0,8);
-      const labels=entries.map(([k])=>k||'Unspecified');
-      const data=entries.map(([,v])=>v);
-      const total=data.reduce((a,b)=>a+b,0);
-      const totalEl=document.getElementById('industryTotalProjects');
-      if(totalEl) totalEl.textContent=total?total.toLocaleString():'–';
-      if(empty) empty.style.display=total?'none':'flex';
-      if(!total){
-        if(industryChart) industryChart.destroy();
-        industryChart=null;
-        return;
-      }
-      const colors=getChartColors();
-      const palette=[
-        colors.accent,'#10b981','#3b82f6','#ec4899',
-        '#a855f7','#f97316','#22c55e','#0ea5e9'
-      ];
-      const barColors=data.map((_,i)=>palette[i%palette.length]);
-      const dataset={
-        data,
-        backgroundColor:barColors,
-        borderWidth:0,
-        borderRadius:6,
-        barThickness:14,
-        maxBarThickness:18
-      };
-      const options={
-        indexAxis:'y',
-        responsive:true,
-        maintainAspectRatio:false,
-        plugins:{
-          legend:{display:false},
-          tooltip:{
-            enabled:true,
-            callbacks:{
-              title:items=>items[0]?.label||'',
-              label:c=>{
-                const v=c.parsed.x||0;
-                const pct=total?(v/total*100):0;
-                return `${v.toLocaleString()} project${v===1?'':'s'} (${pct.toFixed(1)}%)`;
-              }
-            }
-          },
-          datalabels: hasDatalabels()?{
-            anchor:'end',align:'right',clamp:true,clip:true,
-            color:colors.label,font:{size:9,weight:'500'},
-            formatter:v=>v?v.toLocaleString():''
-          }:undefined
-        },
-        scales:{
-          x:{ticks:{color:colors.label},grid:{color:colors.grid}},
-          y:{ticks:{color:colors.label},grid:{display:false}}
-        },
-        onClick:(evt,els)=>{
-          if(!els||!els.length||!onClickFilter) return;
-          const idx=els[0].index;
-          const label=labels[idx];
-          onClickFilter('industry',label);
-        }
-      };
-      if(industryChart){
-        industryChart.data.labels=labels;
-        industryChart.data.datasets[0]=dataset;
-        industryChart.options=options;
-        industryChart.update();
-      }else{
-        industryChart=new Chart(ctx,{type:'bar',data:{labels,datasets:[dataset]},options});
       }
     }
 
@@ -2718,15 +2975,24 @@ const Dashboard = (function() {
         return;
       }
       const colors=getChartColors();
-      const accent=colors.accent, secondary='#10b981', neutral='#e5e7eb';
-      const barColors=data.map((_,i)=>i===0?accent:(i===1?secondary:neutral));
+      const palette = [
+        colors.accent,
+        '#10b981',
+        '#3b82f6',
+        '#f97316',
+        '#6366f1',
+        '#22c55e',
+        '#ec4899',
+        '#0ea5e9'
+      ];
+      const barColors=data.map((_,i)=>palette[i % palette.length]);
       const dataset={
         data,
         backgroundColor:barColors,
         borderWidth:0,
-        borderRadius:6,
-        barThickness:14,
-        maxBarThickness:18
+        borderRadius:12,
+        barThickness:20,
+        maxBarThickness:26
       };
       const options={
         indexAxis:'y',
@@ -2747,19 +3013,20 @@ const Dashboard = (function() {
           },
           datalabels: hasDatalabels()?{
             anchor:'end',align:'right',clamp:true,clip:true,
-            color:colors.label,font:{size:9,weight:'500'},
+            color:colors.label,font:{size:11,weight:'600'},
             formatter:v=>v?v.toLocaleString():''
           }:undefined
         },
         scales:{
-          x:{ticks:{color:colors.label},grid:{color:colors.grid}},
-          y:{ticks:{color:colors.label},grid:{display:false}}
+          x:{ticks:{color:colors.label,font:{size:11}},grid:{color:colors.grid}},
+          y:{ticks:{color:colors.label,font:{size:11}},grid:{display:false}}
         },
         onClick:(evt,els)=>{
           if(!els||!els.length||!onClickFilter) return;
           const idx=els[0].index;
-          const label=labels[idx];
-          onClickFilter('territory',label);
+          const label=labels[idx] || 'Unspecified';
+          const key = label.toLowerCase();
+          onClickFilter('territory', key);
         }
       };
       if(territoryChart){
@@ -2772,76 +3039,117 @@ const Dashboard = (function() {
       }
     }
 
-    function buildLoSChart(LoSCounts,onClickFilter){
-      if(!ensureChartAvailable()) return;
-      const ctx=document.getElementById('LoSChart');
-      const empty=document.getElementById('LoSEmpty');
-      if(!ctx) return;
-      const entries=Object.entries(LoSCounts).sort((a,b)=>b[1]-a[1]).slice(0,8);
-      const labels=entries.map(([k])=>k==='unspecified'?'UNSPECIFIED':k.toUpperCase());
-      const data=entries.map(([,v])=>v);
-      const total=data.reduce((a,b)=>a+b,0);
-      if(empty) empty.style.display=total?'none':'flex';
-      if(!total){
-        if(LoSChart) LoSChart.destroy();
-        LoSChart=null;
+    function buildIndustryChart(industryCounts, onClickFilter) {
+      if (!ensureChartAvailable()) return;
+      const ctx   = document.getElementById('industryChart');
+      const empty = document.getElementById('industryEmpty');
+      const subtitle = document.getElementById('industrySubtitle');
+      if (!ctx) return;
+
+      const entries = Object.entries(industryCounts || {}).sort((a,b)=>b[1]-a[1]);
+      const labels  = entries.map(([k]) => k || 'Unspecified');
+      const data    = entries.map(([,v]) => v);
+      const total   = data.reduce((a,b)=>a+b,0);
+
+      if (subtitle) {
+        subtitle.textContent = total
+          ? `Projects by industry (${labels.length.toString()} industries; total ${total.toLocaleString()} project${total===1?'':'s'}).`
+          : 'No industry information available in this view.';
+      }
+
+      if (empty) empty.style.display = total ? 'none' : 'flex';
+      if (!total) {
+        if (industryChart) industryChart.destroy();
+        industryChart = null;
         return;
       }
-      const colors=getChartColors();
-      const palette=[
-        colors.accent,'#10b981','#3b82f6','#ec4899',
-        '#a855f7','#f97316','#22c55e','#0ea5e9'
+
+      const perBar = 22;
+      const minHeight = 220;
+      const calcHeight = Math.max(minHeight, labels.length * perBar);
+      const inner = document.querySelector('.industry-chart-inner');
+      if (inner) {
+        inner.style.height = calcHeight + 'px';
+      }
+
+      const colors = getChartColors();
+      const palette = [
+        colors.accent,
+        '#10b981',
+        '#3b82f6',
+        '#f97316',
+        '#6366f1',
+        '#22c55e',
+        '#ec4899',
+        '#0ea5e9'
       ];
-      const barColors=data.map((_,i)=>palette[i%palette.length]);
-      const dataset={
+      const barColors = data.map((_,i)=>palette[i % palette.length]);
+
+      const dataset = {
         data,
-        backgroundColor:barColors,
-        borderWidth:0,
-        borderRadius:6,
-        barThickness:14,
-        maxBarThickness:18
+        backgroundColor: barColors,
+        borderWidth: 0,
+        borderRadius: 10,
+        barThickness: 18,
+        maxBarThickness: 22
       };
-      const options={
-        indexAxis:'y',
-        responsive:true,
-        maintainAspectRatio:false,
-        plugins:{
-          legend:{display:false},
-          tooltip:{
-            enabled:true,
-            callbacks:{
-              title:items=>(items[0]?.label||'').toUpperCase(),
-              label:c=>{
-                const v=c.parsed.x||0;
-                const pct=total?(v/total*100):0;
+
+      const options = {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            enabled: true,
+            callbacks: {
+              title: items => items[0]?.label || '',
+              label: c => {
+                const v   = c.parsed.x || 0;
+                const pct = total ? (v/total*100) : 0;
                 return `${v.toLocaleString()} project${v===1?'':'s'} (${pct.toFixed(1)}%)`;
               }
             }
           },
-          datalabels: hasDatalabels()?{
-            anchor:'end',align:'right',clamp:true,clip:true,
-            color:colors.label,font:{size:9,weight:'500'},
-            formatter:v=>v?v.toLocaleString():''
-          }:undefined
+          datalabels: hasDatalabels() ? {
+            anchor: 'end',
+            align: 'right',
+            clamp: true,
+            clip: true,
+            color: colors.label,
+            font: { size: 10, weight: '600' },
+            formatter: v => v ? v.toLocaleString() : ''
+          } : undefined
         },
-        scales:{
-          x:{ticks:{color:colors.label},grid:{color:colors.grid}},
-          y:{ticks:{color:colors.label},grid:{display:false}}
+        scales: {
+          x: {
+            ticks: { color: colors.label, font: { size: 10 } },
+            grid:  { color: colors.grid }
+          },
+          y: {
+            ticks: { color: colors.label, font: { size: 10 } },
+            grid:  { display: false }
+          }
         },
-        onClick:(evt,els)=>{
-          if(!els||!els.length||!onClickFilter) return;
-          const idx=els[0].index;
-          const label=labels[idx];
-          onClickFilter('LoS',label);
+        onClick: (evt, els) => {
+          if (!els || !els.length || !onClickFilter) return;
+          const idx   = els[0].index;
+          const label = labels[idx];
+          onClickFilter('industry', label);
         }
       };
-      if(LoSChart){
-        LoSChart.data.labels=labels;
-        LoSChart.data.datasets[0]=dataset;
-        LoSChart.options=options;
-        LoSChart.update();
-      }else{
-        LoSChart=new Chart(ctx,{type:'bar',data:{labels,datasets:[dataset]},options});
+
+      if (industryChart) {
+        industryChart.data.labels       = labels;
+        industryChart.data.datasets[0]  = dataset;
+        industryChart.options           = options;
+        industryChart.update();
+      } else {
+        industryChart = new Chart(ctx, {
+          type: 'bar',
+          data: { labels, datasets: [dataset] },
+          options
+        });
       }
     }
 
@@ -2849,25 +3157,46 @@ const Dashboard = (function() {
       if(!ensureChartAvailable()) return;
       const ctx=document.getElementById('ragDonut');
       const center=document.getElementById('ragDonutCenter');
+      const numberEl=document.getElementById('ragDonutNumber');
       const empty=document.getElementById('ragEmpty');
+      const subtitle=document.getElementById('ragSubtitle');
+      const caption=document.getElementById('ragDonutCaption');
       if(!ctx||!center) return;
+
       const labels=['Green','Amber','Red'];
       const data=labels.map(l=>ragCounts[l]||0);
+
       const colors=getChartColors();
       const ringColors=[colors.green,colors.amber,colors.red];
+
       const totalDefined=data.reduce((a,b)=>a+b,0);
-      const textNode=center.firstChild && center.firstChild.nodeType === Node.TEXT_NODE ? center.firstChild : null;
-      if(textNode) {
-        textNode.nodeValue = totalDefined ? totalDefined.toLocaleString() : '–';
-      } else {
-        center.childNodes[0].nodeValue = totalDefined ? totalDefined.toLocaleString() : '–';
+      const totalUnspecified = ragCounts['Unspecified'] || 0;
+
+      if (numberEl) {
+        numberEl.textContent = totalDefined ? totalDefined.toLocaleString() : '–';
       }
+
+      if(caption){
+        if(totalUnspecified>0){
+          caption.textContent = `${totalDefined.toLocaleString()} with RAG set · ${totalUnspecified.toLocaleString()} unspecified`;
+        }else{
+          caption.textContent = 'Number of projects with a RAG rating';
+        }
+      }
+
+      if(subtitle){
+        subtitle.textContent = totalDefined
+          ? 'Risk split across projects with a defined RAG rating (Green / Amber / Red).'
+          : 'No RAG information available in the current view.';
+      }
+
       if(empty) empty.style.display=totalDefined?'none':'flex';
       if(!totalDefined){
         if(ragChart) ragChart.destroy();
         ragChart=null;
         return;
       }
+
       const options={
         plugins:{
           legend:{display:false},
@@ -2890,7 +3219,7 @@ const Dashboard = (function() {
           if(!els||!els.length||!onClickFilter) return;
           const idx=els[0].index;
           const label=labels[idx];
-          onClickFilter('rag',label);
+          onClickFilter('rag', label);
         }
       };
       const dataset={
@@ -2909,6 +3238,130 @@ const Dashboard = (function() {
       }
     }
 
+    function buildLoSByTerritoryCharts(LoSCounts, LoSByTerritory, onClickFilter){
+      if(!ensureChartAvailable()) return;
+
+      const configs = [
+        { terrCode: 'DE', label: 'Germany (DE)', canvasId: 'LoSChartDE', emptyId: 'LoSEmptyDE', subtitleId: 'losSubtitleDE' },
+        { terrCode: 'UK', label: 'United Kingdom (UK)', canvasId: 'LoSChartUK', emptyId: 'LoSEmptyUK', subtitleId: 'losSubtitleUK' },
+        { terrCode: 'ME', label: 'Middle East (ME)', canvasId: 'LoSChartME', emptyId: 'LoSEmptyME', subtitleId: 'losSubtitleME' }
+      ];
+
+      const colors = getChartColors();
+      const palette = [
+        colors.accent,
+        '#2563eb',
+        '#10b981',
+        '#f97316',
+        '#a855f7',
+        '#ec4899',
+        '#0ea5e9',
+        '#22c55e'
+      ];
+
+      configs.forEach(cfg => {
+        const ctx = document.getElementById(cfg.canvasId);
+        const empty = document.getElementById(cfg.emptyId);
+        const subtitleEl = document.getElementById(cfg.subtitleId);
+        if(!ctx) return;
+
+        const terrMap = (LoSByTerritory && LoSByTerritory[cfg.terrCode]) || {};
+        const labelsRaw = Object.keys(terrMap || {}).filter(k => k);
+        const labels = labelsRaw.sort((a,b)=>a.localeCompare(b));
+        const data = labels.map(k => terrMap[k] || 0);
+        const total = data.reduce((a,b)=>a+b,0);
+
+        if(subtitleEl){
+          subtitleEl.textContent = total
+            ? `LoS split for ${total.toLocaleString()} project${total === 1 ? '' : 's'} in ${cfg.label}.`
+            : `No projects with LoS tagged in ${cfg.label} in this view.`;
+        }
+
+        if(empty) empty.style.display = total ? 'none' : 'flex';
+
+        let chartInstance = ctx._losChartInstance;
+
+        if(!total){
+          if(chartInstance){
+            chartInstance.destroy();
+            ctx._losChartInstance = null;
+          }
+          return;
+        }
+
+        const barColors = data.map((_,i)=>palette[i % palette.length]);
+        const dataset = {
+          data,
+          backgroundColor: barColors,
+          borderWidth: 0,
+          borderRadius: 10,
+          barThickness: 14,
+          maxBarThickness: 18
+        };
+
+        const options = {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              enabled: true,
+              callbacks: {
+                title: items => `${items[0]?.label || ''} – ${cfg.label}`,
+                label: c => {
+                  const v = c.parsed.x || 0;
+                  const pct = total ? (v/total*100) : 0;
+                  return `${v.toLocaleString()} project${v===1?'':'s'} (${pct.toFixed(1)}%)`;
+                }
+              }
+            },
+            datalabels: hasDatalabels() ? {
+              anchor: 'end',
+              align: 'right',
+              clamp: true,
+              clip: true,
+              color: colors.label,
+              font: { size: 11, weight: '600' },
+              formatter: v => v ? `${v.toLocaleString()}` : ''
+            } : undefined
+          },
+          scales: {
+            x: { ticks: { color: colors.label,font:{size:11} }, grid: { color: colors.grid } },
+            y: { ticks: { color: colors.label,font:{size:11} }, grid: { display: false } }
+          },
+          onClick: (evt, els) => {
+            if(!els || !els.length || !onClickFilter) return;
+            const idx = els[0].index;
+            const keyRaw = labels[idx] || '';
+            const losKey = keyRaw.toLowerCase();
+            onClickFilter('LoS', losKey);
+          }
+        };
+
+        const displayLabels = labels.map(k =>
+          k === 'unspecified' ? 'UNSPECIFIED' : k.toUpperCase()
+        );
+
+        if(chartInstance){
+          chartInstance.data.labels = displayLabels;
+          chartInstance.data.datasets[0] = dataset;
+          chartInstance.options = options;
+          chartInstance.update();
+        }else{
+          chartInstance = new Chart(ctx,{
+            type: 'bar',
+            data: {
+              labels: displayLabels,
+              datasets: [dataset]
+            },
+            options
+          });
+          ctx._losChartInstance = chartInstance;
+        }
+      });
+    }
+
     function exportChartPng(id){
       const canvas=document.getElementById(id);
       if(!canvas){Message.show('Chart not found for export.','error');return;}
@@ -2924,11 +3377,11 @@ const Dashboard = (function() {
     }
 
     function rebuildAll(m,onClickFilter,rows){
-      buildStatusChart(m.statusCounts,onClickFilter,rows);
-      buildIndustryChart(m.industryCounts,onClickFilter);
+      buildStatusChart(rows);
       buildTerritoryChart(m.territoryCounts,onClickFilter);
-      buildLoSChart(m.LoSCounts,onClickFilter);
+      buildIndustryChart(m.industryCounts,onClickFilter);
       buildRagDonut(m.ragCounts,onClickFilter);
+      buildLoSByTerritoryCharts(m.LoSCounts, m.LoSByTerritory, onClickFilter);
     }
 
     return {rebuildAll,exportChartPng};
@@ -2993,41 +3446,101 @@ const Dashboard = (function() {
     }
 
     function populateFilterOptions(rows){
-      const territories=Array.from(new Set(rows.map(r=>r.territory).filter(Boolean))).sort();
-      const industries=Array.from(new Set(rows.map(r=>r.industry).filter(Boolean))).sort();
-      const resourcesRaw=rows.map(r=>r.resources).filter(Boolean);
-      const capabilitiesRaw=rows.map(r=>r.capability).filter(Boolean);
-      const resources=DataService.explodeMultiNames(resourcesRaw);
-      const capabilities=DataService.explodeMultiNames(capabilitiesRaw);
-      const utilisations=Array.from(new Set(rows.map(r=>r.utilisation).filter(Boolean))).sort();
-      const multiTowers=Array.from(new Set(rows.map(r=>r.multiTower).filter(Boolean))).sort();
-      const statuses=Array.from(new Set(rows.map(r=>r.status).filter(Boolean))).sort();
-      const rags=Array.from(new Set(rows.map(r=>r.rag).filter(Boolean))).sort();
+      const norm = v => (v == null ? '' : String(v).trim());
+      const normLower = v => norm(v).toLowerCase();
 
-      const LoSMap=new Map();
-      rows.forEach(r=>{
-        if(Array.isArray(r.LoS)){
-          r.LoS.forEach(label=>{
-            if(!label) return;
-            const key=label.trim().toLowerCase();
-            if(!key) return;
-            if(!LoSMap.has(key)) LoSMap.set(key,label.trim());
+      const territoriesSet = new Map();
+      const industriesSet  = new Map();
+
+      rows.forEach(r => {
+        const tLabel = norm(r.territory) || 'Unspecified';
+        const tKey   = tLabel.toLowerCase();
+        if (tKey && !territoriesSet.has(tKey)) {
+          territoriesSet.set(tKey, tLabel);
+        }
+
+        const iLabel = norm(r.industry) || 'Unspecified';
+        const iKey   = iLabel.toLowerCase();
+        if (iKey && !industriesSet.has(iKey)) {
+          industriesSet.set(iKey, iLabel);
+        }
+      });
+
+      const territories = Array.from(territoriesSet.entries())
+        .sort((a,b) => a[1].localeCompare(b[1]))
+        .map(([key,label]) => ({ key, label }));
+
+      const industries = Array.from(industriesSet.entries())
+        .sort((a,b) => a[1].localeCompare(b[1]))
+        .map(([key,label]) => ({ key, label }));
+
+      const resourcesRaw    = rows.map(r => r.resources).filter(Boolean);
+      const capabilitiesRaw = rows.map(r => r.capability).filter(Boolean);
+      const resources       = DataService.explodeMultiNames(resourcesRaw);
+      const capabilities    = DataService.explodeMultiNames(capabilitiesRaw);
+
+      const utilisations = Array.from(new Set(
+        rows.map(r => norm(r.utilisation)).filter(Boolean).map(normLower)
+      )).sort().map(key => ({ key, label: key.toUpperCase() }));
+
+      const multiTowers = Array.from(new Set(
+        rows.map(r => norm(r.multiTower)).filter(Boolean).map(normLower)
+      )).sort().map(key => ({ key, label: key.toUpperCase() }));
+
+      const statuses = Array.from(new Set(
+        rows.map(r => norm(r.status)).filter(Boolean).map(normLower)
+      )).sort().map(key => ({ key, label: key.toUpperCase() }));
+
+      const rags = Array.from(new Set(
+        rows.map(r => norm(r.rag)).filter(Boolean).map(normLower)
+      )).sort().map(key => ({
+        key,
+        label: key.charAt(0).toUpperCase() + key.slice(1)
+      }));
+
+      const LoSMap = new Map();
+      rows.forEach(r => {
+        if (Array.isArray(r.LoS)) {
+          r.LoS.forEach(label => {
+            const display = norm(label);
+            if (!display) return;
+            const k = display.toLowerCase();
+            if (!LoSMap.has(k)) LoSMap.set(k, display);
           });
         }
       });
-      const LoSValues=Array.from(LoSMap.entries())
-        .sort((a,b)=>a[1].localeCompare(b[1]))
-        .map(([k,l])=>({key:k,label:l}));
+      const LoSValues = Array.from(LoSMap.entries())
+        .sort((a,b) => a[1].localeCompare(b[1]))
+        .map(([key,label]) => ({ key, label }));
 
-      MultiSelect.createOptions('filterStatus',statuses.length?statuses:['Active','On hold','Closed']);
-      MultiSelect.createOptions('filterRag',rags.length?rags:['Green','Amber','Red']);
-      MultiSelect.createOptions('filterTerritory',territories);
-      MultiSelect.createOptions('filterIndustry',industries);
-      MultiSelect.createOptions('filterCapability',capabilities);
-      MultiSelect.createOptions('filterMultiTower',multiTowers);
-      MultiSelect.createOptions('filterResources',resources);
-      MultiSelect.createOptions('filterUtilisation',utilisations);
-      MultiSelect.createOptions('filterLoS',LoSValues);
+      MultiSelect.createOptions('filterStatus',
+        statuses.length ? statuses : [
+          { key:'active',   label:'Active' },
+          { key:'on hold',  label:'On hold' },
+          { key:'closed',   label:'Closed' }
+        ]
+      );
+      MultiSelect.createOptions('filterRag',
+        rags.length ? rags : [
+          { key:'green', label:'Green' },
+          { key:'amber', label:'Amber' },
+          { key:'red',   label:'Red' }
+        ]
+      );
+
+      MultiSelect.createOptions('filterTerritory', territories);
+      MultiSelect.createOptions('filterIndustry', industries);
+
+      MultiSelect.createOptions('filterCapability',
+        capabilities.map(label => ({ key: label.toLowerCase(), label }))
+      );
+      MultiSelect.createOptions('filterMultiTower', multiTowers);
+      MultiSelect.createOptions('filterResources',
+        resources.map(label => ({ key: label.toLowerCase(), label }))
+      );
+      MultiSelect.createOptions('filterUtilisation', utilisations);
+      MultiSelect.createOptions('filterLoS', LoSValues);
+
       MultiSelect.applySelectionsToDom();
     }
 
@@ -3212,18 +3725,34 @@ const Dashboard = (function() {
       if(t) t.checked=theme==='dark';
     }
 
-    function handleChartClickFilter(type,value){
-      const values=MultiSelect.getValues();
-      const vLower=value.toLowerCase();
-      if(type==='rag') values.rag=[vLower];
-      else if(type==='industry') values.industry=[vLower];
-      else if(type==='territory') values.territory=[vLower];
-      else if(type==='LoS') values.LoS=[vLower];
+    function handleChartClickFilter(type, value) {
+      const values = MultiSelect.getValues();
+      if (value == null) return;
+
+      const rawLabel = String(value).trim();
+      if (!rawLabel) return;
+
+      const key = rawLabel.toLowerCase();
+
+      if (type === 'rag') {
+        values.rag = [key];
+      } else if (type === 'industry') {
+        values.industry = [key];
+      } else if (type === 'territory') {
+        values.territory = [key];
+      } else if (type === 'LoS') {
+        values.LoS = [key];
+      } else {
+        return;
+      }
+
       MultiSelect.setValues(values);
       MultiSelect.applySelectionsToDom();
       Filters.save();
       applyFiltersAndRenderFn();
-      Message.show(`Filter applied from chart: ${type.toUpperCase()} = ${value}`,'info',3000);
+
+      const labelForMessage = rawLabel;
+      Message.show(`Filter applied from chart: ${type.toUpperCase()} = ${labelForMessage}`, 'info', 3000);
     }
 
     function applyFiltersAndRender(){
@@ -3328,28 +3857,6 @@ const Dashboard = (function() {
       reader.readAsArrayBuffer(file);
     }
 
-    function persistDataset(rows){
-      try{
-        const plain=rows.map(r=>({
-          name:r.name,capability:r.capability,status:r.status,rag:r.rag,
-          start:r.start?DataService.fmtDate(r.start):null,end:r.end?DataService.fmtDate(r.end):null,
-          durationMonths:r.durationMonths,
-          territory:r.territory,client:r.client,
-          multiTower:r.multiTower,resources:r.resources,industry:r.industry,
-          LoS:r.LoS,LoSLower:r.LoSLower,LoSDisplay:r.LoSDisplay,
-          partner:r.partner,utilisation:r.utilisation,
-          notes:r.notes,scope:r.scope,risks:r.risks
-        }));
-        const json=JSON.stringify({rows:plain},null,0);
-        const payload=window.LZString?LZString.compressToUTF16(json):json;
-        localStorage.setItem('dashboard-data-v1',payload);
-      }catch(e){console.warn('Persist dataset failed:',e);}
-    }
-
-    function clearPersistedDataset(){
-      try{localStorage.removeItem('dashboard-data-v1');}catch{}
-    }
-
     function handleUpload(file){
       const name=file.name.toLowerCase();
       const isExcel=name.endsWith('.xls')||name.endsWith('.xlsx');
@@ -3361,7 +3868,6 @@ const Dashboard = (function() {
         UI.populateFilterOptions(rows);
         Filters.clear();
         applyFiltersAndRender();
-        persistDataset(rows);
         Message.show(`Loaded ${rows.length.toLocaleString()} rows from uploaded ${label}.`,'success',4000);
       };
       if(isExcel){
@@ -3490,10 +3996,11 @@ const Dashboard = (function() {
           const isPrint=root.getAttribute('data-print-mode')==='on';
           const next=!isPrint;
           root.setAttribute('data-print-mode',next?'on':'off');
+          printToggle.setAttribute('aria-pressed', next ? 'true' : 'false');
           if(printNow) {
             printNow.classList.toggle('btn-print-now-hidden',!next);
           }
-          printToggle.textContent=next?'Exit print‑friendly view':'Print‑friendly view';
+          printToggle.textContent = next ? 'Exit print / PDF mode' : 'Print / PDF mode';
         });
       }
       if(printNow){
@@ -3533,7 +4040,7 @@ const Dashboard = (function() {
           atRisk:0,
           multiTowerCount:0,
           closed:0,
-          statusCounts:{},ragCounts:{},industryCounts:{},territoryCounts:{},LoSCounts:{}
+          statusCounts:{},ragCounts:{},industryCounts:{},territoryCounts:{},LoSCounts:{},LoSByTerritory:{}
         });
         UI.updatePortfolioChips({total:0,industries:0});
         Filters.clear();
@@ -3542,6 +4049,7 @@ const Dashboard = (function() {
           industryCounts:{},
           territoryCounts:{},
           LoSCounts:{},
+          LoSByTerritory:{},
           ragCounts:{},
           total:0,
           upcoming:0,
@@ -3552,22 +4060,35 @@ const Dashboard = (function() {
           multiTowerCount:0,
           closed:0
         },handleChartClickFilter,[]);
-        clearPersistedDataset();
         Message.show('Dashboard reset. You can upload a new CSV or Excel file.','success',3000);
       });
     }
 
     function initFilterToggle(){
-      const toggle=document.getElementById('toggleFilters');
-      const filterBar=document.getElementById('filterBar');
-      if(!toggle || !filterBar) return;
-      toggle.addEventListener('click',()=>{
-        const isHidden=filterBar.style.display==='none';
-        filterBar.style.display=isHidden?'flex':'none';
-        toggle.setAttribute('aria-expanded',isHidden?'true':'false');
+      const toggle = document.getElementById('toggleFilters');
+      const filterBar = document.getElementById('filterBar');
+      if (!toggle || !filterBar) return;
+
+      filterBar.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded','true');
+      const labelSpan0 = toggle.querySelector('span:last-child');
+      if (labelSpan0) labelSpan0.textContent = 'Hide filters';
+
+      toggle.addEventListener('click', () => {
+        const isCurrentlyVisible = !filterBar.hasAttribute('hidden');
+        const nextVisible = !isCurrentlyVisible;
+
+        if (nextVisible) {
+          filterBar.removeAttribute('hidden');
+        } else {
+          filterBar.setAttribute('hidden','hidden');
+        }
+
+        toggle.setAttribute('aria-expanded', nextVisible ? 'true' : 'false');
+
         const labelSpan = toggle.querySelector('span:last-child');
         if (labelSpan) {
-          labelSpan.textContent=isHidden?'Hide filters':'Show filters';
+          labelSpan.textContent = nextVisible ? 'Hide filters' : 'Show filters';
         }
       });
     }
@@ -3588,14 +4109,22 @@ const Dashboard = (function() {
 
       UI.updateGettingStartedVisibility();
       Filters.renderChips();
+      applyFiltersAndRender();
     }
 
     return {init,applyFiltersAndRender};
   })();
 
-  document.addEventListener('DOMContentLoaded',App.init);
-  return {};
+  return {
+    DataService,
+    UI,
+    Filters,
+    App
+  };
 })();
+document.addEventListener('DOMContentLoaded', () => {
+  Dashboard.App.init();
+});
 </script>
 </body>
 </html>
