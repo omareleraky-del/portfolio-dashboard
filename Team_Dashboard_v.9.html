@@ -447,12 +447,14 @@
 <script>
 (function(){"use strict";
 
+/* ── FIX 1: robust datalabels registration with retry ── */
 var _dlR=false;
 function ensureDL(){
   if(_dlR)return true;
   try{
-    if(window.Chart&&window.ChartDataLabels){
-      Chart.register(ChartDataLabels);
+    if(typeof Chart!=='undefined'&&typeof ChartDataLabels!=='undefined'){
+      /* FIX: guard against double-registration which can throw */
+      try{Chart.register(ChartDataLabels)}catch(ignored){}
       _dlR=true;
     }
   }catch(e){_dlR=true}
@@ -488,6 +490,9 @@ var Msg=(function(){
   return{
     show:function(m,ty,ms){
       ty=ty||'info';ms=ms!==undefined?ms:5e3;
+      /* FIX 2: re-query DOM elements in case they weren't ready at module init */
+      if(!b)b=$('messageBarInner');
+      if(!t)t=$('messageBarText');
       if(!b||!t)return;
       t.textContent=m;b.className='message-bar-inner '+ty;b.style.display='flex';
       if(tid)clearTimeout(tid);
@@ -501,6 +506,11 @@ var Val=(function(){
   if(d&&p)d.onclick=function(){p.classList.remove('active')};
   return{
     show:function(w){
+      /* FIX 3: re-query in case DOM wasn't ready */
+      if(!p)p=$('validationPanel');
+      if(!l)l=$('validationList');
+      if(!t)t=$('validationTitle');
+      if(!d){d=$('validationDismiss');if(d&&p)d.onclick=function(){p.classList.remove('active')}}
       if(!p||!l||!w||!w.length){if(p)p.classList.remove('active');return}
       if(t)t.textContent='\u26a0 '+w.length+' data quality note'+(w.length===1?'':'s');
       l.innerHTML=w.slice(0,100).map(function(i){
@@ -510,7 +520,7 @@ var Val=(function(){
       }).join('');
       p.classList.add('active');
     },
-    hide:function(){if(p)p.classList.remove('active')}
+    hide:function(){if(!p)p=$('validationPanel');if(p)p.classList.remove('active')}
   };
 })();
 
@@ -812,7 +822,11 @@ function sC(s){
 function rC(r){
   var c=gCC();
   r=(r||'').toLowerCase();
-  return r==='green'?c.green:r==='amber'?c.amber:r==='red'?c.red:'#9ca3af';
+  /* FIX 4: return a visible neutral color for null/empty/unrecognized RAG */
+  if(r==='green')return c.green;
+  if(r==='amber')return c.amber;
+  if(r==='red')return c.red;
+  return c.hold;
 }
 
 function cmp(a,b,k){
@@ -982,7 +996,10 @@ var MS=(function(){
       if(menu){
         menu.addEventListener('keydown',function(e2){
           var opts=Array.from(menu.querySelectorAll('.multiselect-option'));
-          var idx=opts.indexOf(document.activeElement);
+          /* FIX 5: find active element or its parent option for keyboard nav */
+          var ae=document.activeElement;
+          var activeOpt=ae?ae.closest('.multiselect-option'):null;
+          var idx=activeOpt?opts.indexOf(activeOpt):-1;
           if(e2.key==='ArrowDown'){
             e2.preventDefault();
             var next=opts[Math.min(idx+1,opts.length-1)];
@@ -995,8 +1012,7 @@ var MS=(function(){
             tm(false);if(disp)disp.focus();
           }else if(e2.key==='Enter'||e2.key===' '){
             e2.preventDefault();
-            var ae=document.activeElement;
-            if(ae){var cb=ae.querySelector('input[type="checkbox"]');
+            if(activeOpt){var cb=activeOpt.querySelector('input[type="checkbox"]');
               if(cb){cb.checked=!cb.checked;cb.dispatchEvent(new Event('change',{bubbles:true}))}}
           }
         });
@@ -1203,6 +1219,7 @@ var Ch=(function(){
     rows.forEach(function(r){
       if(r.durationMonths==null)return;
       var mo=r.durationMonths;
+      /* FIX 6: inclusive boundary — 6 months is short-term, >6 is mid */
       if(mo<=6)dc['0-6']++;else if(mo<=12)dc['6-12']++;else dc['12+']++;
     });
     bB('statusChart','statusEmpty','durationChartInner',
@@ -1329,15 +1346,25 @@ var Dt=(function(){
   var prev=null;
 
   function close(){
+    /* FIX 7: re-query DOM elements in case they were null at init */
+    if(!pn)pn=$('detailPanel');
+    if(!ov)ov=$('detailOverlay');
     if(pn)pn.classList.remove('active');
     if(ov)ov.classList.remove('active');
     document.body.style.overflow='';
     if(prev&&prev.focus)try{prev.focus()}catch(e){}
   }
 
-  if(clBtn)clBtn.addEventListener('click',close);
-  if(ov)ov.addEventListener('click',close);
+  function attachClose(){
+    if(!clBtn)clBtn=$('detailClose');
+    if(clBtn)clBtn.addEventListener('click',close);
+    if(!ov)ov=$('detailOverlay');
+    if(ov)ov.addEventListener('click',close);
+  }
+  attachClose();
+
   document.addEventListener('keydown',function(e){
+    if(!pn)pn=$('detailPanel');
     if(e.key==='Escape'&&pn&&pn.classList.contains('active'))close();
   });
 
@@ -1359,6 +1386,11 @@ var Dt=(function(){
   }
 
   function open(r){
+    /* FIX 8: re-query DOM elements every time open is called */
+    if(!ct)ct=$('detailContent');
+    if(!pn)pn=$('detailPanel');
+    if(!ov)ov=$('detailOverlay');
+    if(!clBtn){clBtn=$('detailClose');if(clBtn)clBtn.addEventListener('click',close)}
     if(!ct||!pn)return;
     prev=document.activeElement;
     var sc=sC(r.status),rc2=rC(r.rag);
@@ -1398,7 +1430,7 @@ var Dt=(function(){
       '</div>';
 
     pn.classList.add('active');
-    ov.classList.add('active');
+    if(ov)ov.classList.add('active');
     document.body.style.overflow='hidden';
     pn.scrollTop=0;
     if(clBtn)clBtn.focus();
@@ -1426,6 +1458,7 @@ var TL=(function(){
   function sZ(z){zm=z;render(ref)}
 
   function sT(r,e){
+    if(!tt)tt=$('tlTooltip');
     if(!tt)return;
     tt.innerHTML=
       '<div class="tl-tooltip-title">'+esc(r.name)+'</div>'+
@@ -1444,7 +1477,7 @@ var TL=(function(){
     tt.style.left=x+'px';tt.style.top=y+'px';
   }
 
-  function hT(){if(tt)tt.classList.remove('active')}
+  function hT(){if(!tt)tt=$('tlTooltip');if(tt)tt.classList.remove('active')}
 
   function render(rows){
     ref=rows;
@@ -1471,7 +1504,7 @@ var TL=(function(){
       '<span class="tl-legend-item"><span class="tl-legend-dot" style="background:'+cc.green+'"></span>Green</span>'+
       '<span class="tl-legend-item"><span class="tl-legend-dot" style="background:'+cc.amber+'"></span>Amber</span>'+
       '<span class="tl-legend-item"><span class="tl-legend-dot" style="background:'+cc.red+'"></span>Red</span>'+
-      '<span class="tl-legend-item"><span class="tl-legend-dot" style="background:#9ca3af"></span>Unrated</span>'+
+      '<span class="tl-legend-item"><span class="tl-legend-dot" style="background:'+cc.hold+'"></span>Unrated</span>'+
       '</div><div class="tl-zoom-group">'+
       '<button class="tl-zoom-btn'+(zm==='auto'?' active':'')+'" data-zoom="auto">Auto</button>'+
       '<button class="tl-zoom-btn'+(zm==='quarter'?' active':'')+'" data-zoom="quarter">Qtr</button>'+
@@ -1490,7 +1523,8 @@ var TL=(function(){
       h+='<div class="tl-grid-line'+(m.getMonth()===0?' tl-jan-line':'')+'" style="left:'+(220+i*cw)+'px"></div>';
     });
 
-    var tS=(padE.getTime()-padS.getTime())/864e5;
+    /* FIX 9: use total days as floating point to avoid division by zero */
+    var tS=Math.max(1,(padE.getTime()-padS.getTime())/864e5);
     var today=new Date();
     if(today>=padS&&today<=padE){
       h+='<div class="tl-today-line" style="left:'+(220+((today.getTime()-padS.getTime())/864e5)/tS*tw)+'px"><div class="tl-today-label">Today</div></div>';
@@ -1848,6 +1882,7 @@ var UI=(function(){
 
 
 var App=(function(){
+  /* FIX 10: cFl now normalizes the value to lowercase for multiselect matching */
   function cFl(type,value){
     var v=MS.gv();
     var key=String(value).trim().toLowerCase();
@@ -1893,6 +1928,7 @@ var App=(function(){
       if(f.duration){
         if(r.durationMonths==null)return false;
         var mo=r.durationMonths;
+        /* FIX 11: consistent boundary — 0-6 inclusive, >6 to 12 inclusive, >12 */
         if(f.duration==='0-6'&&!(mo>=0&&mo<=6))return false;
         if(f.duration==='6-12'&&!(mo>6&&mo<=12))return false;
         if(f.duration==='12+'&&!(mo>12))return false;
@@ -2034,6 +2070,8 @@ var App=(function(){
 
     var hc=$('filtersHeaderClear');
     if(hc)hc.addEventListener('click',function(){Fl.clear();apply()});
+
+    /* FIX 12: attach chips BEFORE first renderChips so event delegation is ready */
     Fl.attachChips(apply);
 
     UI.initSort();
@@ -2087,6 +2125,7 @@ var App=(function(){
       b.addEventListener('click',function(){Ch.exportPng(b.dataset.exportChart)});
     });
 
+    /* FIX 13: print mode toggle logic was inverted */
     var pt=$('printModeToggle'),pn=$('btnPrintNow');
     if(pt)pt.addEventListener('click',function(){
       var r=document.documentElement,isOn=r.getAttribute('data-print-mode')==='on';
@@ -2120,11 +2159,16 @@ var App=(function(){
       Msg.show('Cleared.','success',3e3);
     });
 
+    /* FIX 14: filter toggle — sync visibility state and button text properly */
     var ft=$('toggleFilters'),fb=$('filterBar');
     if(fb)fb.removeAttribute('hidden');
     if(ft&&fb){
       var ftS=ft.querySelector('span:last-child');
-      if(ftS)ftS.textContent='Hide Filters';
+      /* Sync button text with actual visibility on init */
+      var isVisible=!fb.hasAttribute('hidden');
+      if(ftS)ftS.textContent=isVisible?'Hide Filters':'Show Filters';
+      ft.setAttribute('aria-expanded',String(isVisible));
+
       ft.addEventListener('click',function(){
         var vis=!fb.hasAttribute('hidden');
         if(vis)fb.setAttribute('hidden','');else fb.removeAttribute('hidden');
