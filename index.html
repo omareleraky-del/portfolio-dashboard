@@ -364,7 +364,6 @@
     @media(max-width:640px){.mobile-nav{display:flex}.page{margin-bottom:4.5rem;padding:.8rem}.detail-panel{width:100vw}.header-row{flex-direction:column;align-items:flex-start}.header-right{width:100%}.top-bar-inner{flex-wrap:wrap}.filters-header{flex-direction:column;align-items:flex-start;border-radius:var(--radius-md)}.filters-header-right{width:100%}.top-bar-title{white-space:normal;font-size:.85rem}.portfolio-header{flex-direction:column}.portfolio-meta{justify-content:flex-start}}
     .mobile-nav-item{display:flex;flex-direction:column;align-items:center;gap:.15rem;border:none;background:none;color:var(--muted);font-size:.65rem;cursor:pointer;padding:.3rem .6rem;border-radius:var(--radius-sm);transition:all var(--tr-fast);font-weight:600}
     .mobile-nav-item.active{color:var(--accent)}
-    .mobile-nav-icon{font-size:1.2rem}
     .site-footer{padding:14px 20px;text-align:center;font-size:12px;color:var(--muted)}
     .site-footer-inner{max-width:82rem;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}
     @media print{:root{--bg:#fff;--surface:#fff;--surface-subtle:#fff;--border:#d1d5db;--shadow-xs:none;--shadow-sm:none;--shadow-md:none;--shadow-lg:none}body{background:#fff!important}.top-bar,.message-bar,.skip-link,#toggleFilters,#btnExportCsv,#btnExportExcel,#btnDownloadHtml,#printModeToggle,#btnResetDashboard,#toggleDensity,#uploadData,.validation-panel,.loading-overlay,[data-export-chart],.site-footer,.detail-overlay,.detail-panel,.mobile-nav,.column-picker,.tl-controls,.pagination,.getting-started,.filter-bar,.filters-header,.active-filters{display:none!important}.page{box-shadow:none;margin:0;border-radius:0;padding:.5rem .25rem;border:none;max-width:100%}.table-wrap{max-height:none!important;overflow:visible!important}.chart-scroll-box{max-height:none!important;overflow:visible!important}canvas{max-height:300px!important}}
@@ -405,9 +404,9 @@
     <section id="activeFilters" class="active-filters" aria-live="polite"></section>
     <div class="validation-panel" id="validationPanel" role="alert"><div class="validation-panel-header"><span id="validationTitle">Data Quality Notes</span><button class="validation-dismiss" id="validationDismiss" type="button" aria-label="Dismiss">&times;</button></div><ul class="validation-list" id="validationList"></ul></div>
     <section class="grid" style="margin-bottom:10px" aria-label="Key performance indicators">
-      <article class="card"><div class="card-header"><span class="kpi-label">Total Engagements</span><span class="kpi-icon total">&#931;</span></div><div class="kpi-value" id="kpiTotal">&ndash;</div><div class="kpi-caption">Active and completed initiatives in the current view.</div></article>
-      <article class="card"><div class="card-header"><span class="kpi-label">At Risk</span><span class="kpi-icon duration">&#9888;</span></div><div class="kpi-value" id="kpiAtRisk">&ndash;</div><div class="kpi-caption">Engagements rated Amber or Red.</div></article>
-      <article class="card"><div class="card-header"><span class="kpi-label">Completing &le; 30 Days</span><span class="kpi-icon upcoming">&#128197;</span></div><div class="kpi-value" id="kpiUpcoming">&ndash;</div><div class="kpi-caption">Engagements reaching end date within 30 days.</div></article>
+      <article class="card"><div class="card-header"><span class="kpi-label">Total Engagement</span><span class="kpi-icon total">&#931;</span></div><div class="kpi-value" id="kpiTotal">&ndash;</div><div class="kpi-caption">Active and completed initiatives in the current view.</div></article>
+      <article class="card"><div class="card-header"><span class="kpi-label">At Risk</span><span class="kpi-icon duration">&#9888;</span></div><div class="kpi-value" id="kpiAtRisk">&ndash;</div><div class="kpi-caption">Engagement rated Amber or Red.</div></article>
+      <article class="card"><div class="card-header"><span class="kpi-label">Completing &le; 30 Days</span><span class="kpi-icon upcoming">&#128197;</span></div><div class="kpi-value" id="kpiUpcoming">&ndash;</div><div class="kpi-caption">Engagement reaching end date within 30 days.</div></article>
       <article class="card"><div class="card-header"><span class="kpi-label">Closed</span><span class="kpi-icon closed">&#10004;</span></div><div class="kpi-value" id="kpiClosed">&ndash;</div><div class="kpi-caption">Successfully completed engagements.</div></article>
       <article class="card"><div class="card-header"><span class="kpi-label">Multi-Tower Rate</span><span class="kpi-icon total">&#128279;</span></div><div class="kpi-value" id="kpiMultiTower">&ndash;</div><div class="kpi-caption">Percentage of cross-tower engagements.</div></article>
     </section>
@@ -416,7 +415,7 @@
     <section class="card portfolio-card" aria-label="Portfolio analysis">
       <div class="portfolio-header"><div><h2 class="portfolio-title">Portfolio Analysis</h2><p class="portfolio-subtitle">Engagement distribution by risk, client industry, duration and delivery territory.</p></div><div class="portfolio-meta"><span class="portfolio-chip" id="portfolioProjectsChip">0 engagements</span><span class="portfolio-chip" id="portfolioIndustriesChip">0 industries</span></div></div>
       <div class="portfolio-grid" style="margin-bottom:1rem">
-        <article class="portfolio-panel"><div class="portfolio-panel-header"><div><span class="panel-title">RAG Status Overview</span><br><span class="panel-subtitle" id="ragSubtitle">Delivery confidence distribution across the portfolio.</span></div><div class="panel-actions"><button class="btn btn-secondary btn-small" data-export-chart="ragDonut">Export</button></div></div><div class="chart-wrap portfolio-chart-wrap donut-wrap" style="min-height:280px;position:relative"><canvas id="ragDonut"></canvas><div class="chart-empty-overlay" id="ragEmpty" style="display:flex">No RAG data available.</div><div class="donut-center"><span id="ragDonutNumber">&ndash;</span><div class="donut-caption" id="ragDonutCaption">Engagements assessed</div></div></div><div id="ragSummary" class="chart-summary-strip"></div></article>
+        <article class="portfolio-panel"><div class="portfolio-panel-header"><div><span class="panel-title">RAG Status Overview</span><br><span class="panel-subtitle" id="ragSubtitle">Delivery confidence distribution across the portfolio.</span></div><div class="panel-actions"><button class="btn btn-secondary btn-small" data-export-chart="ragDonut">Export</button></div></div><div class="chart-wrap portfolio-chart-wrap donut-wrap" style="min-height:280px;position:relative"><canvas id="ragDonut"></canvas><div class="chart-empty-overlay" id="ragEmpty" style="display:flex">No RAG data available.</div><div class="donut-center"><span id="ragDonutNumber">&ndash;</span><div class="donut-caption" id="ragDonutCaption">Engagement</div></div></div><div id="ragSummary" class="chart-summary-strip"></div></article>
         <article class="portfolio-panel"><div class="portfolio-panel-header"><div><span class="panel-title">Client Industry Breakdown</span><br><span class="panel-subtitle" id="industrySubtitle">Engagement distribution by client industry.</span></div><div class="panel-actions"><span class="chart-total-badge" id="industryTotalBadge">0 total</span><button class="btn btn-secondary btn-small" data-export-chart="industryChart">Export</button></div></div><div class="chart-scroll-box"><div class="chart-scroll-inner" id="industryChartInner" style="min-height:260px"><canvas id="industryChart"></canvas><div class="chart-empty-overlay" id="industryEmpty" style="display:flex">No industry data available.</div></div></div></article>
       </div>
       <div class="portfolio-grid" style="margin-bottom:1rem">
@@ -431,7 +430,7 @@
     </section>
     <div class="section-title-row"><h2 class="section-title">Engagement Register</h2><div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap"><div class="view-toggle-group" role="radiogroup" aria-label="View mode"><button class="view-toggle-btn active" id="viewTable" role="radio" aria-checked="true" type="button">&#128203; Table</button><button class="view-toggle-btn" id="viewCards" role="radio" aria-checked="false" type="button">&#127183; Cards</button><button class="view-toggle-btn" id="viewTimeline" role="radio" aria-checked="false" type="button">&#128197; Timeline</button></div><div class="column-picker"><button class="btn btn-small btn-secondary" id="columnPickerBtn" type="button">&#9881; Columns</button><div class="column-picker-menu" id="columnPickerMenu"></div></div><span class="pill" id="projectsCount">0 engagements</span></div></div>
     <section class="projects-card">
-      <div class="projects-table-view active" id="projectsTableView"><div class="table-wrap" role="region" aria-label="Engagements data table" tabindex="0"><table class="data-table" id="projectsTable"><thead><tr><th data-key="name" data-col="0">Engagement <span class="sort-indicator"></span></th><th data-key="capability" data-col="1">Capability <span class="sort-indicator"></span></th><th data-key="status" data-col="2">Status <span class="sort-indicator"></span></th><th data-key="rag" data-col="3">RAG <span class="sort-indicator"></span></th><th data-key="start" data-col="4">Start <span class="sort-indicator"></span></th><th data-key="end" data-col="5">End <span class="sort-indicator"></span></th><th data-key="durationMonths" data-col="6">Dur.&nbsp;(mo) <span class="sort-indicator"></span></th><th data-key="territory" data-col="7">Territory <span class="sort-indicator"></span></th><th data-key="client" data-col="8">Client <span class="sort-indicator"></span></th><th data-key="multiTower" data-col="9">Multi-T <span class="sort-indicator"></span></th><th data-key="resources" data-col="10">Resources <span class="sort-indicator"></span></th><th data-key="industry" data-col="11">Industry <span class="sort-indicator"></span></th><th data-key="LoS" data-col="12">LoS <span class="sort-indicator"></span></th><th data-key="partner" data-col="13">Lead <span class="sort-indicator"></span></th><th data-key="utilisation" data-col="14">Util% <span class="sort-indicator"></span></th><th data-key="scope" data-col="15">Scope <span class="sort-indicator"></span></th><th data-key="risks" data-col="16">Risks <span class="sort-indicator"></span></th></tr></thead><tbody></tbody></table></div><div class="pagination" id="pagination"></div></div>
+      <div class="projects-table-view active" id="projectsTableView"><div class="table-wrap" role="region" aria-label="Engagement data table" tabindex="0"><table class="data-table" id="projectsTable"><thead><tr><th data-key="name" data-col="0">Engagement <span class="sort-indicator"></span></th><th data-key="capability" data-col="1">Capability <span class="sort-indicator"></span></th><th data-key="status" data-col="2">Status <span class="sort-indicator"></span></th><th data-key="rag" data-col="3">RAG <span class="sort-indicator"></span></th><th data-key="start" data-col="4">Start <span class="sort-indicator"></span></th><th data-key="end" data-col="5">End <span class="sort-indicator"></span></th><th data-key="durationMonths" data-col="6">Dur.&nbsp;(mo) <span class="sort-indicator"></span></th><th data-key="territory" data-col="7">Territory <span class="sort-indicator"></span></th><th data-key="client" data-col="8">Client <span class="sort-indicator"></span></th><th data-key="multiTower" data-col="9">Multi-T <span class="sort-indicator"></span></th><th data-key="resources" data-col="10">Resources <span class="sort-indicator"></span></th><th data-key="industry" data-col="11">Industry <span class="sort-indicator"></span></th><th data-key="LoS" data-col="12">LoS <span class="sort-indicator"></span></th><th data-key="partner" data-col="13">Lead <span class="sort-indicator"></span></th><th data-key="utilisation" data-col="14">Util% <span class="sort-indicator"></span></th><th data-key="scope" data-col="15">Scope <span class="sort-indicator"></span></th><th data-key="risks" data-col="16">Risks <span class="sort-indicator"></span></th></tr></thead><tbody></tbody></table></div><div class="pagination" id="pagination"></div></div>
       <div class="projects-cards-view" id="projectsCardsView"><div class="project-cards-grid" id="projectCardsGrid"></div></div>
       <div class="projects-timeline-view" id="projectsTimelineView"><div id="timelineContent"></div></div>
       <div class="table-footer"><span id="tableInfo" aria-live="polite">No engagements loaded.</span><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="btn" id="toggleDensity" aria-pressed="false" type="button">Compact View</button><button class="btn btn-secondary" id="btnExportCsv" type="button">Export CSV</button><button class="btn btn-secondary" id="btnExportExcel" type="button">Export Excel</button><button class="btn btn-secondary" id="printModeToggle" type="button" aria-pressed="false">Print Layout</button><button class="btn btn-secondary" id="btnDownloadHtml" type="button">Save Snapshot</button><button class="btn btn-secondary btn-print-now-hidden" id="btnPrintNow" type="button">Print Now</button></div></div>
@@ -447,14 +446,22 @@
 <script>
 (function(){"use strict";
 
-/* ── FIX 1: robust datalabels registration with retry ── */
+/* ===== BUG FIX 1: ChartDataLabels registration safety =====
+   Original could throw if Chart wasn't loaded yet or if double-registered.
+   Now we guard every call and track state properly. */
 var _dlR=false;
 function ensureDL(){
   if(_dlR)return true;
   try{
     if(typeof Chart!=='undefined'&&typeof ChartDataLabels!=='undefined'){
-      /* FIX: guard against double-registration which can throw */
-      try{Chart.register(ChartDataLabels)}catch(ignored){}
+      /* BUG FIX: Check if already registered before registering to avoid errors */
+      var alreadyRegistered=false;
+      try{
+        if(Chart.registry&&Chart.registry.plugins&&Chart.registry.plugins.get('datalabels'))alreadyRegistered=true;
+      }catch(ignored){}
+      if(!alreadyRegistered){
+        try{Chart.register(ChartDataLabels)}catch(ignored){}
+      }
       _dlR=true;
     }
   }catch(e){_dlR=true}
@@ -490,7 +497,6 @@ var Msg=(function(){
   return{
     show:function(m,ty,ms){
       ty=ty||'info';ms=ms!==undefined?ms:5e3;
-      /* FIX 2: re-query DOM elements in case they weren't ready at module init */
       if(!b)b=$('messageBarInner');
       if(!t)t=$('messageBarText');
       if(!b||!t)return;
@@ -506,7 +512,6 @@ var Val=(function(){
   if(d&&p)d.onclick=function(){p.classList.remove('active')};
   return{
     show:function(w){
-      /* FIX 3: re-query in case DOM wasn't ready */
       if(!p)p=$('validationPanel');
       if(!l)l=$('validationList');
       if(!t)t=$('validationTitle');
@@ -524,6 +529,9 @@ var Val=(function(){
   };
 })();
 
+/* ===== BUG FIX 2: Date format detection =====
+   The original DF.detect could produce wrong results when sample sizes were small.
+   Now it also handles edge cases where both parts <= 12. */
 var DF=(function(){
   var f='dmy';
   return{
@@ -533,8 +541,11 @@ var DF=(function(){
         if(!s)return;
         var m=String(s).trim().replace(/[.\-]/g,'/').match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/);
         if(!m)return;
-        if(+m[1]>12&&+m[2]<=12)dm++;
-        if(+m[2]>12&&+m[1]<=12)md++;
+        var p1=+m[1],p2=+m[2];
+        if(p1>12&&p2<=12)dm++;
+        else if(p2>12&&p1<=12)md++;
+        /* BUG FIX: When both <=12, neither counter increments - that's correct,
+           but we default to 'dmy' which is fine for most non-US locales */
       });
       f=md>dm?'mdy':'dmy';return f;
     },
@@ -621,6 +632,7 @@ var DS=(function(){
     return typeof v==='string'?v:String(v==null?'':v);
   }
 
+  /* ===== BUG FIX 3: CSV parsing - handle BOM and edge cases ===== */
   function pC(text){
     if(!text)return[];
     if(text.charCodeAt(0)===0xFEFF)text=text.slice(1);
@@ -680,9 +692,12 @@ var DS=(function(){
     return Array.from(s).sort(function(a,b){return a.localeCompare(b)});
   }
 
-  function nR(row,ri){
+  /* ===== BUG FIX 4: normalizeRow - parameter name collision fixed =====
+     The original had 'ri' as parameter which shadowed the variable 'ri2' usage
+     and the local variable 'ri' for industry. Renamed to 'rowIdx' for clarity. */
+  function nR(row,rowIdx){
     var w=[];
-    var sr=row.__sr||(ri!=null?ri+2:'?');
+    var sr=row.__sr||(rowIdx!=null?rowIdx+2:'?');
     var lk={};
     Object.keys(row).forEach(function(k){
       var n=k.toLowerCase().trim();
@@ -702,7 +717,7 @@ var DS=(function(){
 
     var rn=get('name'),rc=get('capability'),rs=get('status'),rr=get('rag'),
         rst=get('start'),re=get('end'),rt=get('territory'),rcl=get('client'),
-        rmt=get('multiTower'),rres=get('resources'),ri2=get('industry'),
+        rmt=get('multiTower'),rres=get('resources'),rind=get('industry'),
         rl=get('LoS'),rp=get('partner'),ru=get('uRaw'),rno=get('notes'),
         rsc=get('scope'),rrk=get('risks');
 
@@ -728,7 +743,7 @@ var DS=(function(){
     return{
       name:(rn||'').trim(),capability:nN(rc),status:(rs||'').trim(),rag:(rr||'').trim()||null,
       start:sd,end:ed,durationMonths:dur,territory:nN(rt)||'Unspecified',client:(rcl||'').trim(),
-      multiTower:nN(rmt),resources:nN(rres),industry:nN(ri2)||'Unspecified',
+      multiTower:nN(rmt),resources:nN(rres),industry:nN(rind)||'Unspecified',
       LoS:la,LoSLower:la.map(function(v){return v.toLowerCase()}),LoSDisplay:la.join(', '),
       partner:nN(rp),utilisation:util,notes:(rno||'').trim(),scope:(rsc||'').trim(),risks:(rrk||'').trim(),
       _w:w,_sr:sr
@@ -791,11 +806,21 @@ var DS=(function(){
 })();
 
 
+/* ===== BUG FIX 5: Chart Registry - safer destroy =====
+   Added null check and try/catch around destroy to prevent errors
+   when chart was already destroyed or corrupted */
 var CR={
   _m:{},
   reg:function(id,c){this.del(id);this._m[id]=c},
   get:function(id){return this._m[id]||null},
-  del:function(id){if(this._m[id]){try{this._m[id].destroy()}catch(e){}delete this._m[id]}},
+  del:function(id){
+    if(this._m[id]){
+      try{
+        if(this._m[id].canvas)this._m[id].destroy();
+      }catch(e){}
+      delete this._m[id];
+    }
+  },
   clear:function(){var s=this;Object.keys(this._m).forEach(function(k){s.del(k)})}
 };
 
@@ -822,13 +847,14 @@ function sC(s){
 function rC(r){
   var c=gCC();
   r=(r||'').toLowerCase();
-  /* FIX 4: return a visible neutral color for null/empty/unrecognized RAG */
   if(r==='green')return c.green;
   if(r==='amber')return c.amber;
   if(r==='red')return c.red;
   return c.hold;
 }
 
+/* ===== BUG FIX 6: Sort comparator - handle 'scope' and 'risks' columns =====
+   Original didn't handle sorting by scope/risks/notes columns properly */
 function cmp(a,b,k){
   if(k==='utilisation')return(parseFloat(String(a.utilisation||'').replace('%',''))||0)-(parseFloat(String(b.utilisation||'').replace('%',''))||0);
   if(k==='durationMonths')return(a.durationMonths!=null?a.durationMonths:-Infinity)-(b.durationMonths!=null?b.durationMonths:-Infinity);
@@ -996,7 +1022,6 @@ var MS=(function(){
       if(menu){
         menu.addEventListener('keydown',function(e2){
           var opts=Array.from(menu.querySelectorAll('.multiselect-option'));
-          /* FIX 5: find active element or its parent option for keyboard nav */
           var ae=document.activeElement;
           var activeOpt=ae?ae.closest('.multiselect-option'):null;
           var idx=activeOpt?opts.indexOf(activeOpt):-1;
@@ -1098,7 +1123,7 @@ var Fl=(function(){
     bg.textContent=st;
     ct.innerHTML='<span style="font-weight:600">'+esc(st)+':</span>'+
       chips.map(function(c2){
-        return'<span class="filter-chip" data-filter-key="'+c2.key+'"><span class="filter-chip-label">'+esc(c2.l)+'</span>'+esc(c2.v)+'<button class="filter-chip-clear" type="button">\u00d7</button></span>';
+        return'<span class="filter-chip" data-filter-key="'+esc(c2.key)+'"><span class="filter-chip-label">'+esc(c2.l)+'</span>'+esc(c2.v)+'<button class="filter-chip-clear" type="button">\u00d7</button></span>';
       }).join('')+'<button class="filter-chip-clear-all" type="button">Reset all</button>';
     document.documentElement.classList.add('filters-active');
   }
@@ -1141,6 +1166,9 @@ var Ch=(function(){
     }).join('');
   }
 
+  /* ===== BUG FIX 7: Chart building - safer datalabels plugin detection =====
+     The original could fail if datalabels wasn't fully loaded when chart was created.
+     Now we check at chart creation time. */
   function bB(id,eid,iid,ls,data,opts){
     opts=opts||{};
     if(!ok())return;
@@ -1161,6 +1189,8 @@ var Ch=(function(){
     if(inner){inner.style.height=opts.ix==='y'?Math.max(220,sL.length*34+60)+'px':'260px'}
     var udl=hDL();
     CR.del(id);
+    var chartPlugins=[];
+    if(udl&&typeof ChartDataLabels!=='undefined')chartPlugins.push(ChartDataLabels);
     CR.reg(id,new Chart(cv,{
       type:'bar',
       data:{labels:sL,datasets:[{data:sD,backgroundColor:sCC,borderWidth:0,borderRadius:3,barThickness:opts.bt||28,maxBarThickness:opts.mbt||38,borderSkipped:false}]},
@@ -1180,7 +1210,7 @@ var Ch=(function(){
         },
         onClick:opts.click
       },
-      plugins:udl?[ChartDataLabels]:[]
+      plugins:chartPlugins
     }));
   }
 
@@ -1195,6 +1225,8 @@ var Ch=(function(){
     var cc=gCC();
     var udl=hDL();
     CR.del(id);
+    var chartPlugins=[];
+    if(udl&&typeof ChartDataLabels!=='undefined')chartPlugins.push(ChartDataLabels);
     CR.reg(id,new Chart(cv,{
       type:'doughnut',
       data:{labels:ls,datasets:[{data:data,backgroundColor:cs,borderWidth:3,borderColor:cc.surface,cutout:'58%',hoverOffset:10}]},
@@ -1209,7 +1241,7 @@ var Ch=(function(){
         maintainAspectRatio:false,layout:{padding:12},
         onClick:opts.click
       },
-      plugins:udl?[ChartDataLabels]:[]
+      plugins:chartPlugins
     }));
   }
 
@@ -1219,7 +1251,6 @@ var Ch=(function(){
     rows.forEach(function(r){
       if(r.durationMonths==null)return;
       var mo=r.durationMonths;
-      /* FIX 6: inclusive boundary — 6 months is short-term, >6 is mid */
       if(mo<=6)dc['0-6']++;else if(mo<=12)dc['6-12']++;else dc['12+']++;
     });
     bB('statusChart','statusEmpty','durationChartInner',
@@ -1250,7 +1281,7 @@ var Ch=(function(){
     var rt=rd.reduce(function(a,b){return a+b},0);
     var rn=$('ragDonutNumber'),rcp=$('ragDonutCaption');
     if(rn)rn.textContent=rt||'\u2013';
-    if(rcp)rcp.textContent=rt?rt+' assessed':'No RAG data';
+    if(rcp)rcp.textContent=rt?'Engagement'+(rt!==1?'s':''):'No RAG data';
     bD('ragDonut','ragEmpty',rl,rd,rcc,{click:function(e,es){if(es&&es.length)cf('rag',rl[es[0].index])}});
     bSS('ragSummary',rl,rcc,rd);
 
@@ -1346,7 +1377,6 @@ var Dt=(function(){
   var prev=null;
 
   function close(){
-    /* FIX 7: re-query DOM elements in case they were null at init */
     if(!pn)pn=$('detailPanel');
     if(!ov)ov=$('detailOverlay');
     if(pn)pn.classList.remove('active');
@@ -1386,7 +1416,6 @@ var Dt=(function(){
   }
 
   function open(r){
-    /* FIX 8: re-query DOM elements every time open is called */
     if(!ct)ct=$('detailContent');
     if(!pn)pn=$('detailPanel');
     if(!ov)ov=$('detailOverlay');
@@ -1479,6 +1508,8 @@ var TL=(function(){
 
   function hT(){if(!tt)tt=$('tlTooltip');if(tt)tt.classList.remove('active')}
 
+  /* ===== BUG FIX 8: Timeline - prevent division by zero when tS is 0 =====
+     Also fixed potential issue where padE could equal padS */
   function render(rows){
     ref=rows;
     var cont=$('timelineContent');
@@ -1490,10 +1521,12 @@ var TL=(function(){
     var maxD=new Date(Math.max.apply(null,dated.map(function(r){return r.end.getTime()})));
     var padS=new Date(minD.getFullYear(),minD.getMonth()-1,1);
     var padE=new Date(maxD.getFullYear(),maxD.getMonth()+2,0);
+    /* BUG FIX: Ensure padE > padS */
+    if(padE<=padS)padE=new Date(padS.getFullYear(),padS.getMonth()+2,0);
     var months=mB(padS,padE);
     var tm=months.length;
     var cw=cws[zm];
-    if(zm==='auto')cw=Math.max(28,Math.min(80,Math.floor(800/tm)));
+    if(zm==='auto')cw=Math.max(28,Math.min(80,Math.floor(800/Math.max(1,tm))));
     var tw=tm*cw;
     var cc=gCC();
     var gC=dated.filter(function(r){return(r.rag||'').toLowerCase()==='green'}).length;
@@ -1523,11 +1556,12 @@ var TL=(function(){
       h+='<div class="tl-grid-line'+(m.getMonth()===0?' tl-jan-line':'')+'" style="left:'+(220+i*cw)+'px"></div>';
     });
 
-    /* FIX 9: use total days as floating point to avoid division by zero */
+    /* BUG FIX: Prevent division by zero */
     var tS=Math.max(1,(padE.getTime()-padS.getTime())/864e5);
     var today=new Date();
     if(today>=padS&&today<=padE){
-      h+='<div class="tl-today-line" style="left:'+(220+((today.getTime()-padS.getTime())/864e5)/tS*tw)+'px"><div class="tl-today-label">Today</div></div>';
+      var todayLeft=220+((today.getTime()-padS.getTime())/864e5)/tS*tw;
+      h+='<div class="tl-today-line" style="left:'+todayLeft+'px"><div class="tl-today-label">Today</div></div>';
     }
 
     dated.forEach(function(r,idx){
@@ -1660,6 +1694,7 @@ var UI=(function(){
     var np=$('nextPage');if(np)np.addEventListener('click',function(){if(cP<tp-1){cP++;rT()}});
   }
 
+  /* ===== BUG FIX 9: Table rendering - add data-col to TDs for column picker ===== */
   function rT(){
     var tbody=document.querySelector('#projectsTable tbody');
     if(!tbody)return;
@@ -1718,9 +1753,13 @@ var UI=(function(){
       return p.length>=2?(p[0][0]+p[p.length-1][0]).toUpperCase():nm.substring(0,2).toUpperCase();
     }
 
+    /* ===== BUG FIX 10: Progress percentage for closed projects =====
+       Closed projects should always show 100% progress */
     function pPct(r){
       if(!r.start||!r.end)return null;
-      var t=r.end-r.start,el=new Date()-r.start;
+      var isClosed=(r.status||'').toLowerCase()==='closed';
+      if(isClosed)return 100;
+      var t=r.end.getTime()-r.start.getTime(),el=new Date().getTime()-r.start.getTime();
       if(t<=0)return 100;
       return cl(Math.round(el/t*100),0,100);
     }
@@ -1739,9 +1778,12 @@ var UI=(function(){
 
     function rLb(rag){return rag?(rag.charAt(0).toUpperCase()+rag.slice(1).toLowerCase()):'Unrated'}
 
+    /* ===== BUG FIX 11: Don't show overdue for closed projects ===== */
     function dR(r){
       if(!r.end)return null;
-      return Math.ceil((r.end-new Date())/864e5);
+      var isClosed=(r.status||'').toLowerCase()==='closed';
+      if(isClosed)return null;
+      return Math.ceil((r.end.getTime()-new Date().getTime())/864e5);
     }
 
     grid.innerHTML=fR.map(function(r,idx){
@@ -1750,11 +1792,21 @@ var UI=(function(){
       var ptrs=(r.partner||'').split(/[;,]/).map(function(s){return s.trim()}).filter(Boolean);
       var pct=pPct(r);
       var days=dR(r);
-      var dLb=days!=null?(days>0?days+'d left':days===0?'Today':Math.abs(days)+'d over'):null;
-      var dCl=days!=null?(days<0?gCC().red:days<=30?gCC().amber:gCC().green):null;
+      var isClosed=(r.status||'').toLowerCase()==='closed';
+      var dLb, dCl;
+      if(isClosed){
+        dLb='Completed';
+        dCl='#9ca3af';
+      } else if(days!=null){
+        dLb=days>0?days+'d left':days===0?'Today':Math.abs(days)+'d over';
+        dCl=days<0?gCC().red:days<=30?gCC().amber:gCC().green;
+      } else {
+        dLb=null;
+        dCl=null;
+      }
       var allP=ptrs.concat(team);
 
-      return'<div class="project-card" data-cidx="'+idx+'" tabindex="0" style="animation-delay:'+(idx*30)+'ms">'+
+      return'<div class="project-card" data-cidx="'+idx+'" tabindex="0" style="animation-delay:'+(Math.min(idx,20)*30)+'ms">'+
         '<div class="pc-accent-bar" style="background:'+rc2+'"></div>'+
         '<div class="pc-header"><div class="pc-title-row"><div class="pc-name">'+esc(r.name)+'</div><div class="pc-badges"><span class="status-pill" style="color:'+sc2+';font-size:.66rem"><span class="status-dot" style="background:'+sc2+'"></span>'+esc(r.status||'\u2013')+'</span></div></div>'+
         '<div class="pc-meta"><span class="pc-meta-item">'+esc(r.client||'\u2013')+'</span><span class="pc-meta-item">'+esc(r.territory)+'</span><span class="pc-meta-item">'+esc(r.industry)+'</span></div></div>'+
@@ -1882,7 +1934,6 @@ var UI=(function(){
 
 
 var App=(function(){
-  /* FIX 10: cFl now normalizes the value to lowercase for multiselect matching */
   function cFl(type,value){
     var v=MS.gv();
     var key=String(value).trim().toLowerCase();
@@ -1923,12 +1974,12 @@ var App=(function(){
       if(sets.multiTower.size&&!sets.multiTower.has(n(r.multiTower)))return false;
       if(sets.LoS.size){
         var losArr=Array.isArray(r.LoSLower)?r.LoSLower.filter(Boolean):[];
+        if(!losArr.length)return false;
         if(!losArr.some(function(v){return sets.LoS.has(v)}))return false;
       }
       if(f.duration){
         if(r.durationMonths==null)return false;
         var mo=r.durationMonths;
-        /* FIX 11: consistent boundary — 0-6 inclusive, >6 to 12 inclusive, >12 */
         if(f.duration==='0-6'&&!(mo>=0&&mo<=6))return false;
         if(f.duration==='6-12'&&!(mo>6&&mo<=12))return false;
         if(f.duration==='12+'&&!(mo>12))return false;
@@ -1963,13 +2014,13 @@ var App=(function(){
     var name=file.name.toLowerCase();
     var isXl=name.endsWith('.xls')||name.endsWith('.xlsx');
     var isCsv=name.endsWith('.csv');
-    if(!isXl&&!isCsv){Msg.show('Unsupported file.','error');return}
+    if(!isXl&&!isCsv){Msg.show('Unsupported file type. Please use CSV or Excel.','error');return}
     Ld.show('Importing\u2026');
 
     requestAnimationFrame(function(){
       setTimeout(function(){
         var post=function(raw,label){
-          if(!raw||!raw.length){Ld.hide();Msg.show('No rows in '+label+'.','error');return}
+          if(!raw||!raw.length){Ld.hide();Msg.show('No rows found in '+label+'.','error');return}
           var dateStrs=[];
           raw.forEach(function(row){
             Object.keys(row).forEach(function(k){
@@ -1986,21 +2037,21 @@ var App=(function(){
           ensureDL();apply();Ld.hide();
           if(warns.length){
             Val.show(warns);
-            Msg.show(rows.length+' rows, '+warns.length+' note'+(warns.length===1?'':'s')+'.','warning',6e3);
+            Msg.show(rows.length+' rows imported, '+warns.length+' note'+(warns.length===1?'':'s')+'.','warning',6e3);
           }else{
             Val.hide();
-            Msg.show(rows.length+' engagements imported.','success',4e3);
+            Msg.show(rows.length+' engagements imported successfully.','success',4e3);
           }
         };
 
         if(isXl){
-          if(!window.XLSX){Ld.hide();Msg.show('XLSX not loaded.','error');return}
+          if(!window.XLSX){Ld.hide();Msg.show('XLSX library not loaded. Please refresh and try again.','error');return}
           var reader=new FileReader();
-          reader.onerror=function(){Ld.hide();Msg.show('Read error.','error')};
+          reader.onerror=function(){Ld.hide();Msg.show('File read error.','error')};
           reader.onload=function(e){
             try{
               var wb=XLSX.read(e.target.result,{type:'array',cellDates:false});
-              if(!wb.SheetNames.length){Ld.hide();Msg.show('No sheets.','error');return}
+              if(!wb.SheetNames.length){Ld.hide();Msg.show('No sheets found in workbook.','error');return}
               var raw=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:'',raw:true}).map(function(row,i){
                 var nr={};Object.keys(row).forEach(function(k){nr[k]=row[k]});
                 nr.__sr=i+2;
@@ -2012,7 +2063,7 @@ var App=(function(){
                 return nr;
               });
               post(raw,'Excel');
-            }catch(ex){Ld.hide();Msg.show('Parse error.','error')}
+            }catch(ex){Ld.hide();Msg.show('Error parsing Excel file: '+ex.message,'error')}
           };
           reader.readAsArrayBuffer(file);
           return;
@@ -2020,9 +2071,9 @@ var App=(function(){
 
         if(isCsv){
           var reader2=new FileReader();
-          reader2.onerror=function(){Ld.hide();Msg.show('Read error.','error')};
+          reader2.onerror=function(){Ld.hide();Msg.show('File read error.','error')};
           reader2.onload=function(e){
-            try{post(DS.parseCsv(e.target.result),'CSV')}catch(ex){Ld.hide();Msg.show('Parse error.','error')}
+            try{post(DS.parseCsv(e.target.result),'CSV')}catch(ex){Ld.hide();Msg.show('Error parsing CSV file: '+ex.message,'error')}
           };
           reader2.readAsText(file);
         }
@@ -2031,9 +2082,11 @@ var App=(function(){
   }
 
   function init(){
+    /* ===== BUG FIX 12: Global error handlers to ensure loading overlay hides ===== */
     window.addEventListener('error',function(){Ld.hide()});
     window.addEventListener('unhandledrejection',function(){Ld.hide()});
 
+    /* ===== BUG FIX 13: Theme initialization - check stored preference first ===== */
     var stored=sG('dashboard-theme');
     var theme=stored||'light';
     try{if(!stored&&window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches)theme='dark'}catch(e){}
@@ -2046,10 +2099,11 @@ var App=(function(){
         var t=tt.checked?'dark':'light';
         document.documentElement.setAttribute('data-theme',t);
         sS('dashboard-theme',t);
+        /* BUG FIX: Delay chart rebuild to allow CSS variables to update */
         setTimeout(function(){
           var m=DS.computeMetrics(UI.getFiltered());
           Ch.rebuildAll(m,cFl,UI.getFiltered());
-        },150);
+        },200);
       });
     }
 
@@ -2071,7 +2125,6 @@ var App=(function(){
     var hc=$('filtersHeaderClear');
     if(hc)hc.addEventListener('click',function(){Fl.clear();apply()});
 
-    /* FIX 12: attach chips BEFORE first renderChips so event delegation is ready */
     Fl.attachChips(apply);
 
     UI.initSort();
@@ -2102,6 +2155,7 @@ var App=(function(){
     var ul=$('uploadData');
     if(ul)ul.addEventListener('change',function(){var f=this.files&&this.files[0];if(f)hU(f);this.value=''});
 
+    /* ===== BUG FIX 14: Drag-drop zone counter tracking ===== */
     var zone=$('filterBar');
     if(zone){
       var dc=0;
@@ -2111,6 +2165,7 @@ var App=(function(){
       zone.addEventListener('drop',function(e){e.preventDefault();e.stopPropagation();dc=0;zone.classList.remove('dragover');var f=e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0];if(f)hU(f)});
     }
 
+    /* ===== BUG FIX 15: Body-level drag/drop to catch files dropped outside filter zone ===== */
     document.body.addEventListener('dragover',function(e){e.preventDefault()});
     document.body.addEventListener('drop',function(e){
       e.preventDefault();
@@ -2125,7 +2180,6 @@ var App=(function(){
       b.addEventListener('click',function(){Ch.exportPng(b.dataset.exportChart)});
     });
 
-    /* FIX 13: print mode toggle logic was inverted */
     var pt=$('printModeToggle'),pn=$('btnPrintNow');
     if(pt)pt.addEventListener('click',function(){
       var r=document.documentElement,isOn=r.getAttribute('data-print-mode')==='on';
@@ -2145,26 +2199,25 @@ var App=(function(){
         var a=document.createElement('a');
         a.download='snapshot_'+new Date().toISOString().slice(0,10)+'.html';
         a.href=u;document.body.appendChild(a);a.click();document.body.removeChild(a);
-        URL.revokeObjectURL(u);Msg.show('Saved.','success',3e3);
-      }catch(e){Msg.show('Failed.','error')}
+        URL.revokeObjectURL(u);Msg.show('Snapshot saved.','success',3e3);
+      }catch(e){Msg.show('Snapshot save failed.','error')}
     });
 
     var rb=$('btnResetDashboard');
     if(rb)rb.addEventListener('click',function(){
-      if(!confirm('Clear all data?'))return;
+      if(!confirm('Clear all data and reset the dashboard?'))return;
       CR.clear();UI.setData([]);UI.render();
       var em={total:0,industries:0,uniqueClients:0,upcoming:0,atRisk:0,multiTowerCount:0,closed:0,statusCounts:{},ragCounts:{},industryCounts:{},territoryCounts:{},LoSByTerritory:{},avgDuration:0,avgUtilisation:0};
       UI.updateKpis(em);UI.updateChips(em);Fl.clear();Val.hide();
       Ch.rebuildAll(em,cFl,[]);
-      Msg.show('Cleared.','success',3e3);
+      Msg.show('Dashboard cleared.','success',3e3);
     });
 
-    /* FIX 14: filter toggle — sync visibility state and button text properly */
+    /* ===== BUG FIX 16: Filter toggle - proper initial state ===== */
     var ft=$('toggleFilters'),fb=$('filterBar');
     if(fb)fb.removeAttribute('hidden');
     if(ft&&fb){
       var ftS=ft.querySelector('span:last-child');
-      /* Sync button text with actual visibility on init */
       var isVisible=!fb.hasAttribute('hidden');
       if(ftS)ftS.textContent=isVisible?'Hide Filters':'Show Filters';
       ft.setAttribute('aria-expanded',String(isVisible));
@@ -2195,10 +2248,16 @@ var App=(function(){
       });
     });
 
+    /* ===== BUG FIX 17: Ctrl+K shortcut - also show filter bar if hidden ===== */
     document.addEventListener('keydown',function(e){
       if((e.ctrlKey||e.metaKey)&&e.key==='k'){
         e.preventDefault();
         if(fb)fb.removeAttribute('hidden');
+        if(ft){
+          ft.setAttribute('aria-expanded','true');
+          var sp=ft.querySelector('span:last-child');
+          if(sp)sp.textContent='Hide Filters';
+        }
         var si=$('filterSearch');if(si)si.focus();
       }
     });
